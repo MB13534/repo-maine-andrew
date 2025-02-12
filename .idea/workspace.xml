@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="">
+    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="refactor(ServiceAreaMap): adds logic to change colors based on theme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/maps/ServiceAreaMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/maps/ServiceAreaMap.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,12 +99,25 @@
       <workItem from="1739334171154" duration="1246000" />
       <workItem from="1739335468179" duration="762000" />
       <workItem from="1739337784778" duration="19063000" />
-      <workItem from="1739387509786" duration="1684000" />
+      <workItem from="1739387509786" duration="2111000" />
     </task>
+    <task id="LOCAL-00001" summary="refactor(ServiceAreaMap): adds logic to change colors based on theme">
+      <option name="closed" value="true" />
+      <created>1739389335283</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739389335283</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="refactor(ServiceAreaMap): adds logic to change colors based on theme" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor(ServiceAreaMap): adds logic to change colors based on theme" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
