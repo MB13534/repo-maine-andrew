@@ -70,3 +70,20 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.popup-dark .mapboxgl-popup-content {
+  @apply bg-gray-800 text-gray-100 rounded-lg shadow-lg p-2;
+}
+
+.popup-dark .mapboxgl-popup-tip {
+  @apply border-t-gray-800;
+}
+
+.popup-light .mapboxgl-popup-content {
+  @apply bg-white text-gray-900 rounded-lg shadow-lg p-2;
+}
+
+.popup-light .mapboxgl-popup-tip {
+  @apply border-t-white;
+}
+

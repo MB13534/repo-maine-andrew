@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { MAPBOX_TOKEN, MAPBOX_STYLE } from "@/lib/mapbox";
@@ -13,6 +13,46 @@ export default function ServiceAreaMap({ hoveredTown }: ServiceAreaMapProps) {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<mapboxgl.Map | null>(null);
   const popupRef = useRef<mapboxgl.Popup | null>(null);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Add theme detection logic
+  useEffect(() => {
+    const checkDarkMode = () => {
+      return document.documentElement.classList.contains("dark");
+    };
+
+    // Initial check
+    setIsDarkMode(checkDarkMode());
+
+    // Watch for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "class") {
+          setIsDarkMode(checkDarkMode());
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Update popup when theme changes
+  useEffect(() => {
+    if (popupRef.current) {
+      // Remove existing popup
+      popupRef.current.remove();
+      popupRef.current = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        className: isDarkMode ? "popup-dark" : "popup-light",
+      });
+    }
+  }, [isDarkMode]);
 
   useEffect(() => {
     if (mapInstance.current || !mapContainer.current) return;
@@ -67,13 +107,16 @@ export default function ServiceAreaMap({ hoveredTown }: ServiceAreaMapProps) {
               0.4,
             ]);
 
-            // Create/update popup
+            // Use state value instead of direct DOM check
             if (!popupRef.current) {
               popupRef.current = new mapboxgl.Popup({
                 closeButton: false,
                 closeOnClick: false,
+                className: isDarkMode ? "popup-dark" : "popup-light",
               });
             }
+
+            // Update existing popup class if it exists
             popupRef.current
               .setLngLat(e.lngLat)
               .setHTML(`<strong>${townName}</strong>`)
@@ -92,7 +135,12 @@ export default function ServiceAreaMap({ hoveredTown }: ServiceAreaMapProps) {
 
     map.on("idle", () => (mapInstance.current = map));
 
-    return () => map.remove();
+    return () => {
+      if (mapInstance.current) {
+        mapInstance.current.remove();
+        mapInstance.current = null;
+      }
+    };
   }, []);
 
   // Effect for Badge hover
