@@ -20,51 +20,15 @@ import {
 } from "lucide-react";
 import { RepossessionForm } from "@/components/repossession-form";
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection";
-
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
-  },
-};
-
-const slideInLeft = {
-  hidden: { opacity: 0, x: -50 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
-  },
-};
-
-const slideInRight = {
-  hidden: { opacity: 0, x: 50 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
-  },
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
-  },
-};
+import SectionHeader from "@/components/SectionHeader";
+import {
+  fadeInUp,
+  scaleIn,
+  slideInLeft,
+  slideInRight,
+  staggerContainer,
+} from "@/lib/animations";
+import SectionContainer from "@/components/SectionContainer";
 
 // Data arrays for Licensing, Services, and Process sections
 const licensing = [
@@ -236,14 +200,13 @@ export default function Home() {
         viewport={{ once: true }}
         variants={slideInLeft}
       >
-        <div className="container mx-auto max-w-6xl grid lg:grid-cols-2 gap-12 items-center px-3 sm:px-4 md:px-6 lg:px-8">
+        <SectionContainer className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 text-center sm:text-left">
             <Badge variant="outline" className="text-primary p-2">
               Since 2010
             </Badge>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">
-              Trusted Repossession Experts
-            </h2>
+            <SectionHeader title="Trusted Repossession Experts" align="left" />
+
             <p className="text-lg text-muted-foreground">
               With over a decade of experience, <strong>RepoCoMaine</strong> has
               established itself as Maine&apos;s premier asset recovery service.
@@ -280,7 +243,7 @@ export default function Home() {
               className="object-cover"
             />
           </div>
-        </div>
+        </SectionContainer>
       </motion.section>
 
       {/* SERVICE AREA MAP  */}
@@ -300,20 +263,17 @@ export default function Home() {
         className="py-24 bg-background text-center text-foreground"
         ref={licensingRef}
       >
-        <div className="container mx-auto max-w-6xl px-3 sm:px-4 md:px-6 lg:px-8">
+        <SectionContainer>
           <motion.div
-            className="mb-12"
             initial="hidden"
             animate={isLicensingInView ? "visible" : "hidden"}
             variants={slideInLeft}
           >
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
-              Licensing &amp; Compliance
-            </h2>
-            <p className="mb-6 text-lg text-muted-foreground">
-              We adhere strictly to federal and state regulations, ensuring
-              every repossession follows proper legal procedures.
-            </p>
+            <SectionHeader
+              title="Licensing & Compliance"
+              description="We adhere strictly to federal and state regulations, ensuring
+              every repossession follows proper legal procedures."
+            />
           </motion.div>
           <motion.div
             className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 px-3 sm:px-4 md:px-6 lg:px-8"
@@ -333,7 +293,7 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </SectionContainer>
       </section>
 
       {/* SERVICES SECTION */}
@@ -344,15 +304,12 @@ export default function Home() {
         initial="hidden"
         animate={isServicesInView ? "visible" : "hidden"}
       >
-        <div className="container mx-auto max-w-6xl px-3 sm:px-4 md:px-6 lg:px-8">
-          <motion.div variants={slideInRight} className="text-center mb-12">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-              Services We Offer
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive asset recovery solutions tailored for financial
-              institutions and lenders.
-            </p>
+        <SectionContainer>
+          <motion.div variants={slideInRight}>
+            <SectionHeader
+              title="Services We Offer"
+              description="Comprehensive asset recovery solutions tailored for financial institutions and lenders."
+            />
           </motion.div>
           <motion.div
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 px-3 sm:px-4 md:px-6 lg:px-8"
@@ -378,7 +335,7 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </SectionContainer>
       </motion.section>
 
       {/* PARTNERSHIPS SECTION  */}
@@ -390,15 +347,13 @@ export default function Home() {
         viewport={{ once: true }}
         variants={slideInLeft}
       >
-        <div className="container mx-auto max-w-6xl px-3 sm:px-4 md:px-6 lg:px-8">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
-            Partnerships &amp; Financial Institution Services
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            We’ve built long-term relationships with Landmarks, credit unions,
-            and other lenders. Our specialized solutions include:
-          </p>
-          <ul className="list-disc list-inside mx-auto max-w-xl text-muted-foreground space-y-2 mt-4">
+        <SectionContainer>
+          <SectionHeader
+            title="Partnerships & Financial Institution Services"
+            description="We’ve built long-term relationships with Landmarks, credit unions,
+            and other lenders. Our specialized solutions include:"
+          />
+          <ul className="list-disc list-inside mx-auto max-w-xl text-muted-foreground space-y-2">
             <li>Fast asset recovery</li>
             <li>Secure vehicle storage &amp; 24-hour surveillance</li>
             <li>Transparent reporting &amp; compliance tracking</li>
@@ -412,7 +367,7 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-        </div>
+        </SectionContainer>
       </motion.section>
 
       {/* PROCESS SECTION  */}
@@ -424,15 +379,11 @@ export default function Home() {
         animate="visible"
         variants={slideInRight}
       >
-        <div className="container mx-auto max-w-6xl px-3 sm:px-4 md:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-foreground">
-              Simple 4-Step Process
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Our repossession process is straightforward and efficient.
-            </p>
-          </div>
+        <SectionContainer>
+          <SectionHeader
+            title="Simple 4-Step Process"
+            description="Our repossession process is straightforward and efficient."
+          />
           <motion.div
             className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 px-3 sm:px-4 md:px-6 lg:px-8"
             variants={staggerContainer}
@@ -458,7 +409,7 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </SectionContainer>
       </motion.section>
 
       {/* CONTACT SECTION */}
@@ -470,22 +421,18 @@ export default function Home() {
         viewport={{ once: true }}
         variants={scaleIn}
       >
-        <div className="container mx-auto max-w-6xl text-center px-3 sm:px-4 md:px-6 lg:px-8">
-          <div className="space-y-8">
-            <h2 className="text-4xl sm:text-5xl font-bold text-foreground">
-              Contact Our Recovery Team
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Ready to start? Fill out the form or call us to speak with one of
-              our experts. Our team typically responds within 24 hours.
-            </p>
-          </div>
+        <SectionContainer className="text-center">
+          <SectionHeader
+            title="Contact Our Recovery Team"
+            description="Ready to start? Fill out the form or call us to speak with one of
+              our experts. Our team typically responds within 24 hours."
+          />
           <Card className="shadow-md mt-8">
             <CardContent className="p-8">
               <RepossessionForm />
             </CardContent>
           </Card>
-        </div>
+        </SectionContainer>
       </motion.section>
 
       {/* EMERGENCY SECTION  */}
@@ -497,14 +444,12 @@ export default function Home() {
         viewport={{ once: true }}
         variants={slideInLeft}
       >
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-foreground">
-            Emergency &amp; 24-Hour Repossession Services
-          </h2>
-          <p className="mb-6 text-lg text-muted-foreground">
-            Need immediate assistance? We provide 24/7 emergency repossession
-            services.
-          </p>
+        <SectionContainer>
+          <SectionHeader
+            title="Emergency & 24-Hour Repossession Services"
+            description="Need immediate assistance? We provide 24/7 emergency repossession
+            services."
+          />
           <Link href="tel:1234567890">
             <Button
               variant="destructive"
@@ -515,7 +460,7 @@ export default function Home() {
               Call Us Now (24/7)
             </Button>
           </Link>
-        </div>
+        </SectionContainer>
       </motion.section>
 
       {/* BOTTOM CTA SECTION  */}
@@ -539,7 +484,7 @@ export default function Home() {
             <Button
               variant="secondary"
               size="lg"
-              className="text-lg font-semibold inline-flex items-center gap-2"
+              className="text-lg font-semibold"
             >
               Speak With an Expert
             </Button>

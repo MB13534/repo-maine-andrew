@@ -4,26 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="feat: adds vercel anapytics">
-      <change afterPath="$PROJECT_DIR$/src/components/theme-provider.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/dropdown-menu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/select.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/themes.ts" afterDir="false" />
+    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="SectionHeader&#10;SectionHeader&#10;StaticPage&#10;/config&#10;modularizes terms, privacy, legal&#10;normalizes stylings ect">
+      <change afterPath="$PROJECT_DIR$/src/components/SectionContainer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SectionHeader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/StaticPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config/footer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config/legal.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config/nav.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config/privacy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config/terms.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/animations.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/legal/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/legal/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/privacy/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/privacy/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/terms/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/terms/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/main-nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main-nav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/repossession-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/repossession-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/maps/ServiceAreaMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/maps/ServiceAreaMap.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/sections/ServiceAreaSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sections/ServiceAreaSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/theme-toggle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/theme-toggle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/mapbox.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/mapbox.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/mapbox.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/mapbox.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +93,8 @@
       <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\next-starter-kit\src\app\privacy" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\src\config" />
+      <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\src" />
       <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\src\components\maps" />
       <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\next-starter-kit\src\components" />
     </key>
@@ -116,7 +120,7 @@
       <workItem from="1739337784778" duration="19063000" />
       <workItem from="1739387509786" duration="3177000" />
       <workItem from="1739391402681" duration="2132000" />
-      <workItem from="1739409140796" duration="11116000" />
+      <workItem from="1739409140796" duration="30611000" />
     </task>
     <task id="LOCAL-00001" summary="refactor(ServiceAreaMap): adds logic to change colors based on theme">
       <option name="closed" value="true" />
@@ -134,7 +138,31 @@
       <option name="project" value="LOCAL" />
       <updated>1739389732156</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added color theme provider. swapped out hardcoded colors. updates some styles">
+      <option name="closed" value="true" />
+      <created>1739420878522</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739420878522</updated>
+    </task>
+    <task id="LOCAL-00004" summary="animations">
+      <option name="closed" value="true" />
+      <created>1739463825229</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1739463825229</updated>
+    </task>
+    <task id="LOCAL-00005" summary="consistencies with styling">
+      <option name="closed" value="true" />
+      <created>1739468869491</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1739468869491</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,7 +171,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="refactor(ServiceAreaMap): adds logic to change colors based on theme" />
     <MESSAGE value="feat: adds vercel anapytics" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: adds vercel anapytics" />
+    <MESSAGE value="added color theme provider. swapped out hardcoded colors. updates some styles" />
+    <MESSAGE value="animations" />
+    <MESSAGE value="consistencies with styling" />
+    <MESSAGE value="SectionHeader&#10;SectionHeader&#10;StaticPage&#10;/config&#10;modularizes terms, privacy, legal&#10;normalizes stylings ect" />
+    <option name="LAST_COMMIT_MESSAGE" value="SectionHeader&#10;SectionHeader&#10;StaticPage&#10;/config&#10;modularizes terms, privacy, legal&#10;normalizes stylings ect" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

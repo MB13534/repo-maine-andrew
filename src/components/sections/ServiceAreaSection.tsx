@@ -2,23 +2,26 @@
 
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { otherAreas, serviceAreas } from "@/lib/mapbox";
+import { otherAreas, serviceAreas } from "@/config/mapbox";
 import ServiceAreaMap from "@/components/maps/ServiceAreaMap";
 import { Separator } from "@/components/ui/separator";
 import { CheckCircle } from "lucide-react";
+import SectionHeader from "@/components/SectionHeader";
 
 export default function ServiceAreaSection() {
   const [hoveredTown, setHoveredTown] = useState<string | null>(null);
 
   return (
-    <div className="container mx-auto max-w-6xl text-center">
-      <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-foreground">
-        Service Area
-      </h2>
-      <p className="mb-8 max-w-2xl mx-auto text-lg text-muted-foreground">
-        We proudly serve <strong>Portland, Maine</strong> and the following
-        communities in the region:
-      </p>
+    <div className="container mx-auto max-w-6xl text-center px-3 sm:px-4 md:px-6 lg:px-8">
+      <SectionHeader
+        title="Service Area"
+        description={
+          <>
+            We proudly serve <strong>Portland, Maine</strong> and the following
+            communities in the region:
+          </>
+        }
+      />
       <div className="flex flex-wrap justify-center gap-2 mb-8">
         {serviceAreas.map((area) => (
           <Badge

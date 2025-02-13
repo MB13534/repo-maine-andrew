@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -13,14 +15,8 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-
-// Navigation config – adjust as needed or move to a separate file.
-const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Contact", href: "#contact" },
-];
+import { motion } from "framer-motion";
+import { navItems } from "@/config/nav";
 
 export function MainNav() {
   return (
@@ -61,10 +57,11 @@ export function MainNav() {
         {/* Right Section: Theme Toggle, Desktop Request Button & Mobile Drawer */}
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          <Button asChild className="hidden md:flex">
-            <Link href={"#contact"}>Request Repossession</Link>
-          </Button>
-
+          <motion.div whileHover={{ scale: 1.05 }}>
+            <Button asChild className="hidden md:flex">
+              <Link href={"#contact"}>Request Repossession</Link>
+            </Button>
+          </motion.div>
           {/* Mobile Menu Trigger */}
           <Sheet>
             <SheetTrigger asChild>

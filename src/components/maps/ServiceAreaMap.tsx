@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { MAPBOX_TOKEN, MAPBOX_STYLE } from "@/lib/mapbox";
+import { MAPBOX_TOKEN, MAPBOX_STYLE } from "@/config/mapbox";
 
 interface ServiceAreaMapProps {
   hoveredTown: string | null;
