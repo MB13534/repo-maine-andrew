@@ -1,5 +1,9 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -17,11 +21,77 @@ import {
 import { RepossessionForm } from "@/components/repossession-form";
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection";
 
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
+
+const slideInLeft = {
+  hidden: { opacity: 0, x: -50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
+
+const slideInRight = {
+  hidden: { opacity: 0, x: 50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
+};
+
 export default function Home() {
+  // Refs for sections that need in-view triggers
+  const aboutRef = useRef(null);
+  const servicesRef = useRef(null);
+  const licensingRef = useRef(null);
+  const processRef = useRef(null);
+
+  const isServicesInView = useInView(servicesRef, {
+    once: true,
+    margin: "-50px",
+  });
+  const isLicensingInView = useInView(licensingRef, {
+    once: true,
+    margin: "-50px",
+  });
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col overflow-hidden">
       {/* HERO SECTION */}
-      <section className="relative min-h-screen flex items-center justify-center bg-muted text-foreground">
+      <motion.section
+        className="relative min-h-screen flex items-center justify-center bg-muted text-foreground"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+      >
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--primary)/0.9)] to-[hsl(var(--background)/0.6)] dark:from-[hsl(var(--primary)/0.95)] dark:to-[hsl(var(--background)/0.8)]" />
           <Image
@@ -32,7 +102,7 @@ export default function Home() {
             priority
           />
         </div>
-        <div className="relative z-10 max-w-6xl w-full px-4 text-center">
+        <div className="relative z-10 max-w-6xl w-full px-8 text-center">
           <Badge
             variant="outline"
             className="mb-6 bg-primary/40 text-primary-foreground border-primary"
@@ -49,13 +119,15 @@ export default function Home() {
             &amp; Lenders
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-lg px-8 py-6"
-            >
-              <Phone className="mr-2 h-5 w-5" />
-              Request Repossession Now
-            </Button>
+            <motion.div whileHover={{ scale: 1.05 }}>
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-lg px-8 py-6"
+              >
+                <Phone className="mr-2 h-5 w-5" />
+                Request Repossession Now
+              </Button>
+            </motion.div>
             <Link href={"#about"}>
               <Button
                 variant="secondary"
@@ -67,11 +139,19 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* ABOUT US SECTION - bg-background */}
-      <section id="about" className="py-24 bg-background text-foreground">
-        <div className="container mx-auto max-w-6xl grid lg:grid-cols-2 gap-12 items-center px-4">
+      {/* ABOUT US SECTION */}
+      <motion.section
+        id="about"
+        className="py-24 bg-background text-foreground"
+        ref={aboutRef}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={slideInLeft}
+      >
+        <div className="container mx-auto max-w-6xl grid lg:grid-cols-2 gap-12 items-center px-8">
           <div className="space-y-6 text-center sm:text-left">
             <Badge variant="outline" className="text-primary">
               Since 2010
@@ -116,20 +196,32 @@ export default function Home() {
             />
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* SERVICE AREA MAP - bg-muted */}
-      <section className="py-24 bg-muted">
+      {/* SERVICE AREA MAP */}
+      <motion.section
+        className="py-24 bg-muted"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={scaleIn}
+      >
         <ServiceAreaSection />
-      </section>
+      </motion.section>
 
-      {/* LICENSING & COMPLIANCE SECTION - bg-background */}
+      {/* LICENSING & COMPLIANCE SECTION */}
       <section
         id="licensing"
-        className="py-24 bg-background px-4 sm:px-6 lg:px-8 text-center text-foreground"
+        className="py-24 bg-background px-8 sm:px-6 lg:px-8 text-center text-foreground"
+        ref={licensingRef}
       >
         <div className="container mx-auto max-w-6xl">
-          <div className="mb-12">
+          <motion.div
+            className="mb-12"
+            initial="hidden"
+            animate={isLicensingInView ? "visible" : "hidden"}
+            variants={slideInLeft}
+          >
             <h2 className="text-4xl sm:text-5xl font-bold mb-6">
               Licensing &amp; Compliance
             </h2>
@@ -137,44 +229,38 @@ export default function Home() {
               We adhere strictly to federal and state regulations, ensuring
               every repossession follows proper legal procedures.
             </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center p-6 border rounded-lg border-border">
-              <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Maine Licensed</h3>
-              <p className="text-muted-foreground">License #PRS-04592</p>
-            </div>
-            <div className="text-center p-6 border rounded-lg border-border">
-              <Gavel className="mx-auto h-12 w-12 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">UCC Article 9</h3>
-              <p className="text-muted-foreground">
-                Compliant with secured transaction laws
-              </p>
-            </div>
-            <div className="text-center p-6 border rounded-lg border-border">
-              <FileSearch className="mx-auto h-12 w-12 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">FDCPA</h3>
-              <p className="text-muted-foreground">
-                Fair Debt Collection Practices Act compliance
-              </p>
-            </div>
-            <div className="text-center p-6 border rounded-lg border-border">
-              <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">
-                Consumer Protection
-              </h3>
-              <p className="text-muted-foreground">
-                State &amp; Federal Regulations
-              </p>
-            </div>
-          </div>
+          </motion.div>
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+            initial="hidden"
+            animate={isLicensingInView ? "visible" : "hidden"}
+            variants={staggerContainer}
+          >
+            {licensing.map((item) => (
+              <motion.div
+                key={item.title}
+                variants={slideInRight}
+                className="text-center p-6 border rounded-lg border-border hover:shadow-lg transition-shadow"
+              >
+                {item.icon}
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-muted-foreground">{item.detail}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
-      {/* SERVICES SECTION - bg-muted */}
-      <section id="services" className="py-24 bg-muted">
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="text-center mb-12">
+      {/* SERVICES SECTION  */}
+      <motion.section
+        id="services"
+        className="py-24 bg-muted"
+        ref={servicesRef}
+        initial="hidden"
+        animate={isServicesInView ? "visible" : "hidden"}
+      >
+        <div className="container mx-auto max-w-6xl px-8">
+          <motion.div variants={slideInRight} className="text-center mb-12 ">
             <h2 className="text-4xl sm:text-5xl font-bold mb-4">
               Services We Offer
             </h2>
@@ -182,32 +268,40 @@ export default function Home() {
               Comprehensive asset recovery solutions tailored for financial
               institutions and lenders.
             </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <Card
-                key={service.title}
-                className="hover:shadow-lg transition-shadow"
-              >
-                <CardHeader>
-                  <div className="mb-4 text-primary">{service.icon}</div>
-                  <CardTitle className="text-xl font-bold">
-                    {service.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{service.description}</p>
-                </CardContent>
-              </Card>
+          </motion.div>
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 px-8"
+            variants={staggerContainer}
+          >
+            {services.map((service, index) => (
+              <motion.div key={index} variants={fadeInUp}>
+                <Card className="hover:shadow-lg transition-shadow h-full">
+                  <CardHeader>
+                    <div className="mb-4 text-primary">{service.icon}</div>
+                    <CardTitle className="text-xl font-bold">
+                      {service.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      {service.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* PARTNERSHIPS SECTION - bg-background */}
-      <section
+      {/* PARTNERSHIPS SECTION */}
+      <motion.section
         id="partnerships"
-        className="py-24 bg-background px-4 sm:px-6 lg:px-8 text-center text-foreground"
+        className="py-24 bg-background px-8 sm:px-6 lg:px-8 text-center text-foreground"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={slideInLeft}
       >
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-4xl sm:text-5xl font-bold mb-6">
@@ -226,18 +320,25 @@ export default function Home() {
           </ul>
           <div className="mt-8">
             <Link href={"#contact"}>
-              {/* Updated button: text uses primary-foreground instead of white */}
               <Button className="bg-primary hover:bg-primary/80 px-6 py-3 text-lg text-primary-foreground transition">
                 Partner With Us Today
               </Button>
             </Link>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* PROCESS SECTION - bg-muted */}
-      <section id="process" className="py-24 bg-muted">
-        <div className="container mx-auto max-w-6xl px-4">
+      {/* PROCESS SECTION */}
+      <motion.section
+        id="process"
+        className="py-24 bg-muted"
+        ref={processRef}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={slideInRight}
+      >
+        <div className="container mx-auto max-w-6xl px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-foreground">
               Simple 4-Step Process
@@ -246,11 +347,16 @@ export default function Home() {
               Our repossession process is straightforward and efficient.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 px-8"
+            variants={staggerContainer}
+          >
             {steps.map((step, index) => (
-              <div
+              <motion.div
                 key={step.title}
-                className="text-center p-6 border rounded-lg border-border"
+                variants={fadeInUp}
+                whileHover={{ scale: 1.05 }}
+                className="text-center p-6 border rounded-lg border-border hover:shadow-lg transition-shadow"
               >
                 <div className="w-16 h-16 bg-primary rounded-full mx-auto mb-4 flex items-center justify-center text-primary-foreground text-xl font-bold">
                   {index + 1}
@@ -261,15 +367,22 @@ export default function Home() {
                 <p className="text-sm text-muted-foreground">
                   {step.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* CONTACT SECTION - bg-background */}
-      <section id="contact" className="py-24 bg-background">
-        <div className="container mx-auto max-w-6xl px-4 text-center">
+      {/* CONTACT SECTION */}
+      <motion.section
+        id="contact"
+        className="py-24 bg-background"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={scaleIn}
+      >
+        <div className="container mx-auto max-w-6xl px-8 text-center">
           <div className="space-y-8">
             <h2 className="text-4xl sm:text-5xl font-bold text-foreground">
               Contact Our Recovery Team
@@ -278,34 +391,23 @@ export default function Home() {
               Ready to start? Fill out the form or call us to speak with one of
               our experts. Our team typically responds within 24 hours.
             </p>
-            <div className="space-y-4">
-              <div className="flex items-center justify-center gap-4">
-                <Phone className="h-6 w-6 text-primary" />
-                <div>
-                  <p className="font-semibold text-foreground">
-                    24/7 Emergency Line
-                  </p>
-                  <p className="text-lg text-muted-foreground">
-                    (207) 555-REPO
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
-
-          {/* Contact Form */}
           <Card className="shadow-md mt-8">
             <CardContent className="p-8">
               <RepossessionForm />
             </CardContent>
           </Card>
         </div>
-      </section>
+      </motion.section>
 
-      {/* EMERGENCY SECTION - bg-muted */}
-      <section
+      {/* EMERGENCY SECTION */}
+      <motion.section
         id="emergency"
-        className="py-24 bg-muted px-4 sm:px-6 lg:px-8 text-center"
+        className="py-24 bg-muted px-8 sm:px-6 lg:px-8 text-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={slideInLeft}
       >
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-foreground">
@@ -326,11 +428,17 @@ export default function Home() {
             </Button>
           </Link>
         </div>
-      </section>
+      </motion.section>
 
-      {/* BOTTOM CTA SECTION - updated to follow alternating pattern */}
-      <section className="py-10 bg-background text-foreground text-center">
-        <div className="container mx-auto max-w-2xl px-4">
+      {/* BOTTOM CTA SECTION  */}
+      <motion.section
+        className="py-10 bg-background text-foreground text-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={slideInRight}
+      >
+        <div className="container mx-auto max-w-2xl px-8">
           <h2 className="text-2xl sm:text-3xl font-semibold mb-4">
             Still Have Questions?
           </h2>
@@ -349,14 +457,34 @@ export default function Home() {
             </Button>
           </Link>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
 
-/**
- * Example Data for Services, Steps, & Service Areas
- */
+const licensing = [
+  {
+    title: "Maine Licensed",
+    icon: <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />,
+    detail: "License #PRS-04592",
+  },
+  {
+    title: "UCC Article 9",
+    icon: <Gavel className="mx-auto h-12 w-12 text-primary mb-4" />,
+    detail: "Compliant with secured transaction laws",
+  },
+  {
+    title: "FDCPA",
+    icon: <FileSearch className="mx-auto h-12 w-12 text-primary mb-4" />,
+    detail: "Fair Debt Collection Practices Act compliance",
+  },
+  {
+    title: "Consumer Protection",
+    icon: <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />,
+    detail: "State & Federal Regulations",
+  },
+];
+
 const services = [
   {
     title: "Car Repossession",
