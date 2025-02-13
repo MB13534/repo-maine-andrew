@@ -1,4 +1,3 @@
-// components/repossession-form.tsx
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,6 +15,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -41,7 +47,7 @@ export function RepossessionForm() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    // Add your form submission logic here
+    // TODO: Form submission logic
   }
 
   return (
@@ -55,7 +61,11 @@ export function RepossessionForm() {
               <FormItem>
                 <FormLabel>Full Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="John Doe" {...field} />
+                  <Input
+                    placeholder="John Doe"
+                    {...field}
+                    autoComplete="name"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -72,6 +82,7 @@ export function RepossessionForm() {
                     type="email"
                     placeholder="john@example.com"
                     {...field}
+                    autoComplete="email"
                   />
                 </FormControl>
                 <FormMessage />
@@ -85,7 +96,12 @@ export function RepossessionForm() {
               <FormItem>
                 <FormLabel>Phone Number</FormLabel>
                 <FormControl>
-                  <Input type="tel" placeholder="(555) 555-5555" {...field} />
+                  <Input
+                    type="tel"
+                    placeholder="(555) 555-5555"
+                    {...field}
+                    autoComplete="tel"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -96,18 +112,29 @@ export function RepossessionForm() {
             name="assetType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Asset Type</FormLabel>
+                <FormLabel htmlFor="assetType">Asset Type</FormLabel>
                 <FormControl>
-                  <select
-                    {...field}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  <Select
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    name={field.name}
                   >
-                    <option value="">Select Asset Type</option>
-                    <option value="car">Automobile</option>
-                    <option value="boat">Boat/Marine</option>
-                    <option value="rv">RV/Camper</option>
-                    <option value="equipment">Heavy Equipment</option>
-                  </select>
+                    <SelectTrigger id="assetType">
+                      <SelectValue
+                        placeholder={
+                          <span className="text-muted-foreground">
+                            Select Asset Type
+                          </span>
+                        }
+                      />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="car">Automobile</SelectItem>
+                      <SelectItem value="boat">Boat/Marine</SelectItem>
+                      <SelectItem value="rv">RV/Camper</SelectItem>
+                      <SelectItem value="equipment">Heavy Equipment</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -122,7 +149,11 @@ export function RepossessionForm() {
             <FormItem>
               <FormLabel>Last Known Asset Location</FormLabel>
               <FormControl>
-                <Input placeholder="Enter address or city/state" {...field} />
+                <Input
+                  placeholder="Enter address or city/state"
+                  {...field}
+                  autoComplete="street-address"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -140,6 +171,7 @@ export function RepossessionForm() {
                   placeholder="Any special instructions or details about the asset..."
                   className="resize-none"
                   {...field}
+                  autoComplete="off"
                 />
               </FormControl>
               <FormMessage />

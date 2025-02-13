@@ -5,9 +5,9 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="max-w-3xl mx-auto py-10 px-4 space-y-6">
+    <div className="max-w-3xl mx-auto py-10 px-4 space-y-6 bg-background text-foreground">
       <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
-      <p>
+      <p className="text-base">
         Your privacy is important to us. This policy explains how we collect,
         use, and protect your personal information when you use our services or
         visit our website. Lorem ipsum dolor sit amet, consectetur adipiscing
@@ -18,7 +18,7 @@ export default function PrivacyPage() {
         <h2 className="text-xl font-semibold mb-2">
           1. Information We Collect
         </h2>
-        <p>
+        <p className="text-base">
           We may collect personal data such as your name, email address, phone
           number, and other details required to process repossession requests.
           In addition, we may gather non-personal data, such as IP addresses or
@@ -30,7 +30,7 @@ export default function PrivacyPage() {
         <h2 className="text-xl font-semibold mb-2">
           2. How We Use Your Information
         </h2>
-        <p>
+        <p className="text-base">
           We use the collected information to fulfill service requests,
           communicate with you, and improve our offerings. We do not sell or
           share your personal data with third parties except as necessary to
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
 
       <section>
         <h2 className="text-xl font-semibold mb-2">3. Data Security</h2>
-        <p>
+        <p className="text-base">
           We implement industry-standard measures to protect your information
           from unauthorized access, disclosure, or misuse. Sed nec libero
           sollicitudin, bibendum nisi a, tristique nisi.
@@ -50,7 +50,7 @@ export default function PrivacyPage() {
 
       <section>
         <h2 className="text-xl font-semibold mb-2">4. Third-Party Services</h2>
-        <p>
+        <p className="text-base">
           Our website may include links to external sites. We are not
           responsible for the privacy practices of these third parties. Lorem
           ipsum dolor sit amet, consectetur adipiscing elit.
@@ -59,14 +59,14 @@ export default function PrivacyPage() {
 
       <section>
         <h2 className="text-xl font-semibold mb-2">5. Changes to Policy</h2>
-        <p>
+        <p className="text-base">
           We reserve the right to update this Privacy Policy at any time. Any
           changes will be posted here with a new effective date. Morbi quis
           varius eros.
         </p>
       </section>
 
-      <p className="mt-4">
+      <p className="mt-4 text-base">
         For any privacy-related concerns, please contact us at:{" "}
         <a href="mailto:info@yourcompany.com" className="underline">
           info@yourcompany.com

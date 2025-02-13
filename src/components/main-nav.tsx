@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -13,6 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 // Navigation config – adjust as needed or move to a separate file.
 const navItems = [
@@ -62,7 +62,7 @@ export function MainNav() {
         <div className="flex items-center gap-4">
           <ThemeToggle />
           <Button asChild className="hidden md:flex">
-            <Link href="#contact">Request Repossession</Link>
+            <Link href={"#contact"}>Request Repossession</Link>
           </Button>
 
           {/* Mobile Menu Trigger */}
@@ -74,6 +74,15 @@ export function MainNav() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="p-4">
+              <DialogTitle asChild>
+                <VisuallyHidden>Mobile Navigation Menu</VisuallyHidden>
+              </DialogTitle>
+              <DialogDescription asChild>
+                <VisuallyHidden>
+                  Use this menu to navigate the site
+                </VisuallyHidden>
+              </DialogDescription>
+
               <div className="flex flex-col gap-6 pt-8">
                 {navItems.map((item) => (
                   <Link key={item.href} href={item.href}>
@@ -81,7 +90,7 @@ export function MainNav() {
                   </Link>
                 ))}
                 <Button asChild className="mt-4">
-                  <Link href="#contact">Request Repossession</Link>
+                  <Link href={"#contact"}>Request Repossession</Link>
                 </Button>
               </div>
             </SheetContent>

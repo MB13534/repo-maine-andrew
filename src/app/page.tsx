@@ -3,10 +3,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import {
   ShieldCheck,
-  CheckCircle,
   Phone,
   Menu,
   Anchor,
@@ -22,15 +20,10 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection";
 export default function Home() {
   return (
     <div className="flex flex-col">
-      {/*
-        ┌─────────────────────────┐
-        │ 1. HERO SECTION         │
-        └─────────────────────────┘
-      */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gray-900 text-white">
-        {/* Background Image with gradient overlay (dark mode included) */}
+      {/* HERO SECTION */}
+      <section className="relative min-h-screen flex items-center justify-center bg-muted text-foreground">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-gray-900/60 dark:from-blue-950/90 dark:to-gray-950/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--primary)/0.9)] to-[hsl(var(--background)/0.6)] dark:from-[hsl(var(--primary)/0.95)] dark:to-[hsl(var(--background)/0.8)]" />
           <Image
             src="/hero-bg.jpg"
             alt="Professional Repossession Services"
@@ -39,32 +32,31 @@ export default function Home() {
             priority
           />
         </div>
-        {/* Hero Content */}
-        <div className="relative z-10 text-center px-4 max-w-6xl">
+        <div className="relative z-10 max-w-6xl w-full px-4 text-center">
           <Badge
             variant="outline"
-            className="mb-6 bg-blue-800/40 text-blue-100 border-blue-700"
+            className="mb-6 bg-primary/40 text-primary-foreground border-primary"
           >
             <ShieldCheck className="mr-2 h-4 w-4" />
             Licensed &amp; Insured
           </Badge>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.15]">
-            Professional Asset Repossession <br className="hidden lg:block" />
-            Services in Portland, ME
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
+            Professional Asset Repossession
+            <br className="hidden lg:block" /> Services in Portland, ME
           </h1>
-          <p className="mt-6 text-xl sm:text-2xl text-blue-100 max-w-3xl mx-auto">
+          <p className="mt-6 text-xl sm:text-2xl text-primary-foreground max-w-3xl mx-auto">
             Fast, Compliant Repossession Solutions for Financial Institutions
             &amp; Lenders
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
               size="lg"
-              className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-6"
+              className="bg-primary hover:bg-primary/90 text-lg px-8 py-6"
             >
               <Phone className="mr-2 h-5 w-5" />
               Request Repossession Now
             </Button>
-            <Link href="#about">
+            <Link href={"#about"}>
               <Button
                 variant="secondary"
                 size="lg"
@@ -77,51 +69,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/*
-        ┌─────────────────────────┐
-        │ 2. ABOUT US             │
-        └─────────────────────────┘
-      */}
-      <section id="about" className="py-24 bg-white dark:bg-gray-900">
+      {/* ABOUT US SECTION - bg-background */}
+      <section id="about" className="py-24 bg-background text-foreground">
         <div className="container mx-auto max-w-6xl grid lg:grid-cols-2 gap-12 items-center px-4">
-          {/* Left side: text (center on mobile, left on larger screens) */}
           <div className="space-y-6 text-center sm:text-left">
-            <Badge variant="outline" className="text-blue-600">
+            <Badge variant="outline" className="text-primary">
               Since 2010
             </Badge>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight dark:text-white">
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">
               Trusted Repossession Experts
             </h2>
-            <p className="text-lg dark:text-gray-300 text-gray-600">
+            <p className="text-lg text-muted-foreground">
               With over a decade of experience, <strong>RepoCoMaine</strong> has
               established itself as Maine&apos;s premier asset recovery service.
-              Our team of licensed professionals combines cutting-edge
-              technology with strict legal compliance to deliver efficient,
-              ethical repossession services.
+              Our licensed professionals combine cutting-edge technology with
+              strict legal compliance to deliver efficient, ethical repossession
+              services.
             </p>
-            <p className="text-lg dark:text-gray-300 text-gray-600">
+            <p className="text-lg text-muted-foreground">
               Our mission is to provide secure and fully compliant repossession
               services that protect both our clients and debtors under all
               applicable laws. We value integrity, transparency, and efficiency
-              in every asset recovery we undertake.
+              in every recovery.
             </p>
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
-                <div className="text-3xl font-bold text-blue-600">2,500+</div>
-                <div className="text-sm dark:text-gray-300 text-gray-600">
+              <div className="p-4 bg-muted rounded-lg text-center">
+                <div className="text-3xl font-bold text-primary">2,500+</div>
+                <div className="text-sm text-muted-foreground">
                   Successful Recoveries
                 </div>
               </div>
-              <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg text-center">
-                <div className="text-3xl font-bold text-blue-600">24/7</div>
-                <div className="text-sm dark:text-gray-300 text-gray-600">
+              <div className="p-4 bg-muted rounded-lg text-center">
+                <div className="text-3xl font-bold text-primary">24/7</div>
+                <div className="text-sm text-muted-foreground">
                   Emergency Service
                 </div>
               </div>
             </div>
           </div>
-          {/* Right side: image */}
-          <div className="relative aspect-video bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden">
+          <div className="relative aspect-video bg-muted rounded-xl overflow-hidden">
             <Image
               src="/about-us.jpg"
               alt="Our Team"
@@ -132,101 +118,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/*
-        ┌───────────────────────────────┐
-        │ 3. SERVICES WE OFFER         │
-        └───────────────────────────────┘
-      */}
-      <section
-        id="services"
-        className="py-24 bg-gray-50 dark:bg-gray-800 px-4 sm:px-6 lg:px-8 text-center"
-      >
-        <div className="container mx-auto max-w-6xl">
-          <div className="mb-12">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 dark:text-white">
-              Services We Offer
-            </h2>
-            <p className="max-w-2xl mx-auto text-lg dark:text-gray-300 text-gray-600">
-              Comprehensive asset recovery solutions tailored for financial
-              institutions and lenders
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service) => (
-              <Card
-                key={service.title}
-                className="hover:shadow-lg transition-shadow"
-              >
-                <CardHeader>
-                  <div className="mb-4 text-blue-600">{service.icon}</div>
-                  <CardTitle className="text-xl font-bold">
-                    {service.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="dark:text-gray-300 text-gray-600">
-                    {service.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
+      {/* SERVICE AREA MAP - bg-muted */}
+      <section className="py-24 bg-muted">
+        <ServiceAreaSection />
       </section>
 
-      {/*
-        ┌─────────────────────────────────┐
-        │ 4. LICENSING & COMPLIANCE      │
-        └─────────────────────────────────┘
-      */}
+      {/* LICENSING & COMPLIANCE SECTION - bg-background */}
       <section
         id="licensing"
-        className="py-24 bg-white dark:bg-gray-900 px-4 sm:px-6 lg:px-8 text-center"
+        className="py-24 bg-background px-4 sm:px-6 lg:px-8 text-center text-foreground"
       >
         <div className="container mx-auto max-w-6xl">
           <div className="mb-12">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 dark:text-white">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
               Licensing &amp; Compliance
             </h2>
-            <p className="max-w-xl mx-auto text-lg dark:text-gray-300 text-gray-600">
-              We prioritize strict adherence to federal and state regulations,
-              ensuring every repossession follows proper legal procedures.
+            <p className="mb-6 text-lg text-muted-foreground">
+              We adhere strictly to federal and state regulations, ensuring
+              every repossession follows proper legal procedures.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center p-6 border rounded-lg dark:border-gray-700">
-              <ShieldCheck className="mx-auto h-12 w-12 text-blue-600 mb-4" />
-              <h3 className="text-xl font-semibold mb-2 dark:text-white">
-                Maine Licensed
-              </h3>
-              <p className="dark:text-gray-300 text-gray-600">
-                License #PRS-04592
-              </p>
+            <div className="text-center p-6 border rounded-lg border-border">
+              <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Maine Licensed</h3>
+              <p className="text-muted-foreground">License #PRS-04592</p>
             </div>
-            <div className="text-center p-6 border rounded-lg dark:border-gray-700">
-              <Gavel className="mx-auto h-12 w-12 text-blue-600 mb-4" />
-              <h3 className="text-xl font-semibold mb-2 dark:text-white">
-                UCC Article 9
-              </h3>
-              <p className="dark:text-gray-300 text-gray-600">
+            <div className="text-center p-6 border rounded-lg border-border">
+              <Gavel className="mx-auto h-12 w-12 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">UCC Article 9</h3>
+              <p className="text-muted-foreground">
                 Compliant with secured transaction laws
               </p>
             </div>
-            <div className="text-center p-6 border rounded-lg dark:border-gray-700">
-              <FileSearch className="mx-auto h-12 w-12 text-blue-600 mb-4" />
-              <h3 className="text-xl font-semibold mb-2 dark:text-white">
-                FDCPA
-              </h3>
-              <p className="dark:text-gray-300 text-gray-600">
+            <div className="text-center p-6 border rounded-lg border-border">
+              <FileSearch className="mx-auto h-12 w-12 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">FDCPA</h3>
+              <p className="text-muted-foreground">
                 Fair Debt Collection Practices Act compliance
               </p>
             </div>
-            <div className="text-center p-6 border rounded-lg dark:border-gray-700">
-              <ShieldCheck className="mx-auto h-12 w-12 text-blue-600 mb-4" />
-              <h3 className="text-xl font-semibold mb-2 dark:text-white">
+            <div className="text-center p-6 border rounded-lg border-border">
+              <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">
                 Consumer Protection
               </h3>
-              <p className="dark:text-gray-300 text-gray-600">
+              <p className="text-muted-foreground">
                 State &amp; Federal Regulations
               </p>
             </div>
@@ -234,24 +171,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/*
-        ┌────────────────────────────────────────────────────────┐
-        │ 5. PARTNERSHIPS & FINANCIAL INSTITUTION SERVICES       │
-        └────────────────────────────────────────────────────────┘
-      */}
+      {/* SERVICES SECTION - bg-muted */}
+      <section id="services" className="py-24 bg-muted">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              Services We Offer
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Comprehensive asset recovery solutions tailored for financial
+              institutions and lenders.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service) => (
+              <Card
+                key={service.title}
+                className="hover:shadow-lg transition-shadow"
+              >
+                <CardHeader>
+                  <div className="mb-4 text-primary">{service.icon}</div>
+                  <CardTitle className="text-xl font-bold">
+                    {service.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">{service.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PARTNERSHIPS SECTION - bg-background */}
       <section
         id="partnerships"
-        className="py-24 bg-gray-50 dark:bg-gray-800 px-4 sm:px-6 lg:px-8 text-center"
+        className="py-24 bg-background px-4 sm:px-6 lg:px-8 text-center text-foreground"
       >
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6 dark:text-white">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
             Partnerships &amp; Financial Institution Services
           </h2>
-          <p className="mb-12 max-w-3xl mx-auto text-lg dark:text-gray-300 text-gray-600">
+          <p className="text-lg text-muted-foreground">
             We’ve built long-term relationships with Landmarks, credit unions,
             and other lenders. Our specialized solutions include:
           </p>
-          <ul className="list-disc list-inside text-left mx-auto max-w-xl dark:text-gray-300 text-gray-700 space-y-2">
+          <ul className="list-disc list-inside mx-auto max-w-xl text-muted-foreground space-y-2 mt-4">
             <li>Fast asset recovery</li>
             <li>Secure vehicle storage &amp; 24-hour surveillance</li>
             <li>Transparent reporting &amp; compliance tracking</li>
@@ -259,8 +225,9 @@ export default function Home() {
             <li>Nationwide skip tracing services</li>
           </ul>
           <div className="mt-8">
-            <Link href="#contact">
-              <Button className="bg-blue-600 hover:bg-blue-500 px-6 py-3 text-lg text-white transition">
+            <Link href={"#contact"}>
+              {/* Updated button: text uses primary-foreground instead of white */}
+              <Button className="bg-primary hover:bg-primary/80 px-6 py-3 text-lg text-primary-foreground transition">
                 Partner With Us Today
               </Button>
             </Link>
@@ -268,35 +235,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/*
-        ┌─────────────────────────────────────────────┐
-        │ 6. HOW THE REPOSSESSION PROCESS WORKS       │
-        └─────────────────────────────────────────────┘
-      */}
-      <section
-        id="process"
-        className="py-24 bg-white dark:bg-gray-900 px-4 sm:px-6 lg:px-8 text-center"
-      >
-        <div className="container mx-auto max-w-6xl">
-          <div className="mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-4 dark:text-white">
-              How the Repossession Process Works
+      {/* PROCESS SECTION - bg-muted */}
+      <section id="process" className="py-24 bg-muted">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-foreground">
+              Simple 4-Step Process
             </h2>
-            <p className="text-lg dark:text-gray-300 text-gray-600">
-              We follow a streamlined, step-by-step approach to asset recovery,
-              ensuring fast service and full compliance at every stage.
+            <p className="text-lg text-muted-foreground">
+              Our repossession process is straightforward and efficient.
             </p>
           </div>
-          <div className="grid md:grid-cols-5 gap-8">
-            {processSteps.map((step, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-xl font-bold">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {steps.map((step, index) => (
+              <div
+                key={step.title}
+                className="text-center p-6 border rounded-lg border-border"
+              >
+                <div className="w-16 h-16 bg-primary rounded-full mx-auto mb-4 flex items-center justify-center text-primary-foreground text-xl font-bold">
                   {index + 1}
                 </div>
-                <h3 className="text-lg font-semibold mb-2 dark:text-white">
+                <h3 className="text-lg font-semibold mb-2 text-foreground">
                   {step.title}
                 </h3>
-                <p className="text-sm dark:text-gray-300 text-gray-600">
+                <p className="text-sm text-muted-foreground">
                   {step.description}
                 </p>
               </div>
@@ -305,89 +267,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/*
-        ┌─────────────────────────────────┐
-        │ 7. EMERGENCY & 24-HR SERVICES  │
-        └─────────────────────────────────┘
-      */}
-      <section
-        id="emergency"
-        className="py-24 bg-gray-50 dark:bg-gray-800 px-4 sm:px-6 lg:px-8 text-center"
-      >
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6 dark:text-white">
-            Emergency &amp; 24-Hour Repossession Services
-          </h2>
-          <p className="mb-6 max-w-2xl mx-auto text-lg dark:text-gray-300 text-gray-600">
-            Need Immediate Assistance? We provide 24/7 emergency repossession
-            services.
-          </p>
-          <Link href="tel:1234567890">
-            <Button className="bg-red-600 hover:bg-red-500 text-white px-6 py-3 text-lg transition inline-flex items-center gap-2">
-              <Phone className="h-5 w-5" />
-              Call Us Now (24/7)
-            </Button>
-          </Link>
-        </div>
-      </section>
-
-      {/*
-        ┌─────────────────────────┐
-        │ 8. SERVICE AREA MAP     │
-        └─────────────────────────┘
-      */}
-      <ServiceAreaSection />
-
-      {/*
-        ┌────────────────────────┐
-        │ 9. CONTACT US          │
-        └────────────────────────┘
-      */}
-      <section
-        id="contact"
-        className="py-24 bg-gray-50 dark:bg-gray-800 px-4 sm:px-6 lg:px-8"
-      >
-        <div className="container mx-auto max-w-6xl grid lg:grid-cols-2 gap-12">
+      {/* CONTACT SECTION - bg-background */}
+      <section id="contact" className="py-24 bg-background">
+        <div className="container mx-auto max-w-6xl px-4 text-center">
           <div className="space-y-8">
-            <h2 className="text-4xl sm:text-5xl font-bold dark:text-white">
+            <h2 className="text-4xl sm:text-5xl font-bold text-foreground">
               Contact Our Recovery Team
             </h2>
-            <p className="text-lg dark:text-gray-300 text-gray-600">
+            <p className="text-lg text-muted-foreground">
               Ready to start? Fill out the form or call us to speak with one of
               our experts. Our team typically responds within 24 hours.
             </p>
-            <div className="space-y-4 dark:text-gray-300 text-gray-700">
-              <div className="flex items-center gap-4">
-                <Phone className="h-6 w-6 text-blue-600" />
+            <div className="space-y-4">
+              <div className="flex items-center justify-center gap-4">
+                <Phone className="h-6 w-6 text-primary" />
                 <div>
-                  <p className="font-semibold dark:text-white">
+                  <p className="font-semibold text-foreground">
                     24/7 Emergency Line
                   </p>
-                  <p className="text-lg dark:text-gray-300 text-gray-600">
+                  <p className="text-lg text-muted-foreground">
                     (207) 555-REPO
                   </p>
                 </div>
-              </div>
-              {/* Additional contact info can be added here */}
-            </div>
-            <Separator />
-            <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-              <h3 className="text-lg font-semibold mb-4 dark:text-white">
-                Additional Service Areas
-              </h3>
-              <div className="grid grid-cols-2 gap-2 text-sm dark:text-gray-300 text-gray-600">
-                {otherAreas.map((city) => (
-                  <div key={city} className="flex items-center">
-                    <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
-                    {city}
-                  </div>
-                ))}
               </div>
             </div>
           </div>
 
           {/* Contact Form */}
-          <Card className="shadow-md">
+          <Card className="shadow-md mt-8">
             <CardContent className="p-8">
               <RepossessionForm />
             </CardContent>
@@ -395,23 +302,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/*
-        ┌────────────────────────────────────────────────┐
-        │ (Optional) BOTTOM CTA or Repeated CTA Section │
-        └────────────────────────────────────────────────┘
-      */}
-      <section className="py-10 bg-gray-900 text-white text-center">
-        <div className="max-w-2xl mx-auto px-4">
+      {/* EMERGENCY SECTION - bg-muted */}
+      <section
+        id="emergency"
+        className="py-24 bg-muted px-4 sm:px-6 lg:px-8 text-center"
+      >
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-foreground">
+            Emergency &amp; 24-Hour Repossession Services
+          </h2>
+          <p className="mb-6 text-lg text-muted-foreground">
+            Need immediate assistance? We provide 24/7 emergency repossession
+            services.
+          </p>
+          <Link href="tel:1234567890">
+            <Button
+              variant="destructive"
+              size="lg"
+              className="text-lg inline-flex items-center gap-2"
+            >
+              <Phone className="h-5 w-5" />
+              Call Us Now (24/7)
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* BOTTOM CTA SECTION - updated to follow alternating pattern */}
+      <section className="py-10 bg-background text-foreground text-center">
+        <div className="container mx-auto max-w-2xl px-4">
           <h2 className="text-2xl sm:text-3xl font-semibold mb-4">
             Still Have Questions?
           </h2>
-          <p className="mb-6 text-lg text-gray-300">
+          <p className="mb-6 text-lg">
             Our team is here to help you navigate all aspects of asset recovery.
             Reach out now to learn more about our process and how we can assist
             you.
           </p>
-          <Link href="#contact">
-            <Button className="bg-blue-600 hover:bg-blue-500 px-6 py-3 text-lg font-semibold inline-flex items-center gap-2">
+          <Link href={"#contact"}>
+            <Button
+              variant="secondary"
+              size="lg"
+              className="text-lg font-semibold inline-flex items-center gap-2"
+            >
               Speak With an Expert
             </Button>
           </Link>
@@ -423,7 +356,6 @@ export default function Home() {
 
 /**
  * Example Data for Services, Steps, & Service Areas
- * (These can be moved to separate config files as needed)
  */
 const services = [
   {
@@ -463,37 +395,25 @@ const services = [
   },
 ];
 
-const processSteps = [
+const steps = [
   {
-    title: "Submit a Request",
-    description: "Online form or direct call with asset & debtor info.",
-  },
-  {
-    title: "Skip Tracing & Location",
-    description: "We use advanced methods to find missing assets fast.",
-  },
-  {
-    title: "Legally-Compliant Recovery",
+    title: "Request Submission",
     description:
-      "Trained agents secure vehicles, boats, RVs, etc. by the book.",
+      "Submit your repossession request with complete asset details.",
   },
   {
-    title: "Storage & Auction",
-    description: "Assets are stored or auctioned per lender instructions.",
-  },
-  {
-    title: "Final Resolution",
+    title: "Asset Tracking",
     description:
-      "Detailed reports and documentation provided for each repossession.",
+      "Use advanced tracking and skip tracing to locate the asset quickly.",
   },
-];
-
-const otherAreas = [
-  "Yarmouth",
-  "Cumberland",
-  "Freeport",
-  "Brunswick",
-  "Biddeford",
-  "Saco",
-  "Old Orchard Beach",
+  {
+    title: "Legal Recovery",
+    description:
+      "Execute the recovery with full legal compliance and authorization.",
+  },
+  {
+    title: "Transfer & Documentation",
+    description:
+      "Securely transfer the asset and provide detailed documentation.",
+  },
 ];
