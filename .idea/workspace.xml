@@ -4,28 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="SectionHeader&#10;SectionHeader&#10;StaticPage&#10;/config&#10;modularizes terms, privacy, legal&#10;normalizes stylings ect">
-      <change afterPath="$PROJECT_DIR$/src/components/SectionContainer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SectionHeader.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/StaticPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config/footer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config/legal.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config/nav.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config/privacy.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config/terms.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/animations.ts" afterDir="false" />
+    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="faq section&#10;more color themes&#10;useWatchDataAttribute">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/legal/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/legal/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/privacy/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/privacy/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/terms/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/terms/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/main-nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main-nav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/maps/ServiceAreaMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/maps/ServiceAreaMap.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/sections/ServiceAreaSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sections/ServiceAreaSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/mapbox.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/mapbox.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,8 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -93,8 +74,8 @@
       <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\next-starter-kit\src\app\privacy" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\src\config" />
       <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\src" />
+      <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\src\config" />
       <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\src\components\maps" />
       <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\next-starter-kit\src\components" />
     </key>
@@ -120,7 +101,8 @@
       <workItem from="1739337784778" duration="19063000" />
       <workItem from="1739387509786" duration="3177000" />
       <workItem from="1739391402681" duration="2132000" />
-      <workItem from="1739409140796" duration="30611000" />
+      <workItem from="1739409140796" duration="31751000" />
+      <workItem from="1739586485236" duration="9930000" />
     </task>
     <task id="LOCAL-00001" summary="refactor(ServiceAreaMap): adds logic to change colors based on theme">
       <option name="closed" value="true" />
@@ -162,7 +144,23 @@
       <option name="project" value="LOCAL" />
       <updated>1739468869491</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="SectionHeader&#10;SectionHeader&#10;StaticPage&#10;/config&#10;modularizes terms, privacy, legal&#10;normalizes stylings ect">
+      <option name="closed" value="true" />
+      <created>1739474962600</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1739474962600</updated>
+    </task>
+    <task id="LOCAL-00007" summary="faq section&#10;more color themes&#10;useWatchDataAttribute">
+      <option name="closed" value="true" />
+      <created>1739596026413</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1739596026413</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,7 +173,8 @@
     <MESSAGE value="animations" />
     <MESSAGE value="consistencies with styling" />
     <MESSAGE value="SectionHeader&#10;SectionHeader&#10;StaticPage&#10;/config&#10;modularizes terms, privacy, legal&#10;normalizes stylings ect" />
-    <option name="LAST_COMMIT_MESSAGE" value="SectionHeader&#10;SectionHeader&#10;StaticPage&#10;/config&#10;modularizes terms, privacy, legal&#10;normalizes stylings ect" />
+    <MESSAGE value="faq section&#10;more color themes&#10;useWatchDataAttribute" />
+    <option name="LAST_COMMIT_MESSAGE" value="faq section&#10;more color themes&#10;useWatchDataAttribute" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
+  Info,
   ShieldCheck,
   Phone,
   Menu,
@@ -17,7 +18,14 @@ import {
   Landmark,
   Gavel,
   Clock,
+  BadgeCheck,
 } from "lucide-react";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 import { RepossessionForm } from "@/components/repossession-form";
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection";
 import SectionHeader from "@/components/SectionHeader";
@@ -29,28 +37,119 @@ import {
   staggerContainer,
 } from "@/lib/animations";
 import SectionContainer from "@/components/SectionContainer";
+import useWatchDataAttribute from "@/hooks/useWatchDataAttribute";
 
 // Data arrays for Licensing, Services, and Process sections
 const licensing = [
   {
-    title: "Maine Licensed",
+    title: "Maine Repossession License",
     icon: <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />,
-    detail: "License #PRS-04592",
+    detail:
+      "License #PRS-04592 (Issued by Maine Bureau of Consumer Credit Protection) – required for all repossession companies operating within Maine.",
   },
   {
-    title: "UCC Article 9",
+    title: "NMLS Registration",
+    icon: <BadgeCheck className="mx-auto h-12 w-12 text-primary mb-4" />,
+    detail:
+      "NMLS #1730027 (Nationwide Multistate Licensing System) – ensures federal compliance with consumer credit and debt collection laws.",
+  },
+  {
+    title: "UCC Article 9 Compliance",
     icon: <Gavel className="mx-auto h-12 w-12 text-primary mb-4" />,
-    detail: "Compliant with secured transaction laws",
+    detail:
+      "Repossession actions in Maine must follow Uniform Commercial Code (UCC) Article 9, which governs secured transactions, ensuring lawful repossession of collateral.",
   },
   {
-    title: "FDCPA",
+    title: "Maine Title 9-A Compliance",
     icon: <FileSearch className="mx-auto h-12 w-12 text-primary mb-4" />,
-    detail: "Fair Debt Collection Practices Act compliance",
+    detail:
+      "Maine Consumer Credit Code (Title 9-A, Part 5) regulates default, repossession, and deficiency balances, ensuring legal compliance in all asset recoveries.",
   },
   {
-    title: "Consumer Protection",
+    title: "Fair Debt Collection Practices Act (FDCPA)",
+    icon: <FileSearch className="mx-auto h-12 w-12 text-primary mb-4" />,
+    detail:
+      "We adhere to all FDCPA guidelines to prevent unlawful debt collection practices and ensure consumer rights protection.",
+  },
+  {
+    title: "Consumer Protection & Notification Requirements",
     icon: <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />,
-    detail: "State & Federal Regulations",
+    detail:
+      "Repossession agencies in Maine must comply with notification rules, including the requirement to provide written post-repossession notices to consumers.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Who is legally allowed to perform repossessions in Maine?",
+    answer:
+      "In Maine, only licensed repossession agencies registered with the **Maine Bureau of Consumer Credit Protection (BCCP)** can legally recover vehicles or assets. Agents must also comply with UCC Article 9 and Maine Title 9-A.",
+  },
+  {
+    question: "What are Maine's ‘Breach of Peace’ repossession laws?",
+    answer:
+      "Under **Maine Revised Statutes Title 9-A, Part 5**, a repossession **cannot** occur if it results in a 'breach of the peace.' This means: ",
+    bullets: [
+      "Repossessors **cannot enter a locked garage or property without permission.**",
+      "They **cannot use force or threats** during repossession.",
+      "They **cannot impersonate law enforcement or government officials.**",
+      "If a consumer verbally objects at the scene, the repossession **must be stopped** immediately.",
+    ],
+  },
+  {
+    question: "What notifications are required after repossession?",
+    answer:
+      "Maine law requires lenders to send a **post-repossession notice** within **3 business days**. This must inform the borrower of: ",
+    bullets: [
+      "Where their vehicle or asset is being stored.",
+      "How they can reclaim their property by paying outstanding debts.",
+      "Whether the asset will be **sold privately or at auction**.",
+    ],
+  },
+  {
+    question: "Why is NMLS licensing important?",
+    answer:
+      "The **Nationwide Multistate Licensing System (NMLS)** ensures repossession agencies meet strict federal and state consumer protection laws. Holding an NMLS registration means we:",
+    bullets: [
+      "Maintain proper insurance coverage",
+      "Pass regular background checks",
+      "Complete required training",
+      "Follow **all** Maine and federal repossession laws",
+    ],
+  },
+  {
+    question: "Are the Maine License # and NMLS # the same?",
+    answer:
+      "No. The **Maine Repossession License** (e.g., #PRS-04592) is issued by the **Maine Bureau of Consumer Credit Protection (BCCP)** and is required for operating in the state. The **NMLS # (e.g., #1730027)** is a federal registry ensuring compliance with consumer credit regulations.",
+  },
+  {
+    question: "How many licensed repo companies operate in Maine?",
+    answer:
+      "As of 2024, only about **a dozen** fully licensed repossession agencies operate statewide. We are among the few that maintain **full compliance** with all state and federal laws.",
+  },
+  {
+    question: "What risks come with using unlicensed operators?",
+    answer: "Using unlicensed repossession agents can lead to:",
+    bullets: [
+      "**Invalidated security interests**, making repossession illegal",
+      "**Civil liability for wrongful repossession**, leading to lawsuits",
+      "**FDCPA violations**, with fines up to $1,000 per violation",
+      "**Potential criminal charges** for trespassing or unauthorized vehicle recovery",
+    ],
+  },
+  {
+    question: "What happens after a vehicle is repossessed in Maine?",
+    answer:
+      "After repossession, the lender **must send a post-repossession notice** explaining the next steps. The borrower has a **right to redeem the vehicle** before it is sold at auction by paying off the outstanding loan balance plus any fees.",
+  },
+  {
+    question: "How can I verify the credentials of a repossession company?",
+    answer:
+      "You can verify a repossession agency’s licensing credentials through:",
+    bullets: [
+      "**The Maine Bureau of Consumer Credit Protection** – Check for an active state license.",
+      "**The NMLS Consumer Access website** – Search for the company’s NMLS number.",
+    ],
   },
 ];
 
@@ -92,6 +191,14 @@ const services = [
   },
 ];
 
+const partnershipSolutions = [
+  "Fast asset recovery",
+  "Secure vehicle storage & 24-hour surveillance",
+  "Transparent reporting & compliance tracking",
+  "Real-time status updates via online portal",
+  "Nationwide skip tracing services",
+];
+
 const processSteps = [
   {
     title: "Request Submission",
@@ -114,6 +221,47 @@ const processSteps = [
       "Securely transfer the asset and provide detailed documentation.",
   },
 ];
+
+interface HoverableAccordionTriggerProps
+  extends Omit<
+    React.ComponentPropsWithoutRef<typeof AccordionTrigger>,
+    "children"
+  > {
+  text: string;
+}
+
+function HoverableAccordionTrigger({
+  text,
+  ...props
+}: HoverableAccordionTriggerProps) {
+  const [isHovered, setIsHovered] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const dataState = useWatchDataAttribute(triggerRef, "data-state");
+  const isOpen = dataState === "open";
+
+  const shouldAnimate = !isOpen && isHovered;
+
+  return (
+    <AccordionTrigger
+      ref={triggerRef}
+      {...props}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`group text-left hover:no-underline relative ${props.className ?? ""}`}
+    >
+      <div className="flex items-center space-x-4">
+        <Info className="h-5 w-5 text-primary" />
+        <motion.h3
+          className="text-lg font-semibold"
+          animate={shouldAnimate ? { x: [0, 8, -4, 0] } : { x: 0 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
+          {text}
+        </motion.h3>
+      </div>
+    </AccordionTrigger>
+  );
+}
 
 export default function Home() {
   // Refs for sections that need in-view triggers
@@ -274,9 +422,23 @@ export default function Home() {
               description="We adhere strictly to federal and state regulations, ensuring
               every repossession follows proper legal procedures."
             />
+            <Link
+              href="https://nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/1730027"
+              className="ml-2 underline hover:text-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Badge
+                variant="outline"
+                className="mb-6 md:mb-12 text-lg py-2 px-4 bg-primary text-primary-foreground cursor-pointer transition-transform transform hover:scale-105"
+              >
+                <ShieldCheck className="mr-2 h-6 w-6" />
+                Official NMLS #1730027 - Verify our license
+              </Badge>
+            </Link>
           </motion.div>
           <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 px-3 sm:px-4 md:px-6 lg:px-8"
+            className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-3 sm:px-4 md:px-6 lg:px-8"
             initial="hidden"
             animate={isLicensingInView ? "visible" : "hidden"}
             variants={staggerContainer}
@@ -293,6 +455,52 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
+
+          <div id="faq" className="py-12 bg-background">
+            <SectionHeader
+              title="FAQ"
+              description="Everything you need to know about repossession licensing in Maine and how it affects you."
+            />
+            <Accordion
+              type="single"
+              collapsible
+              className="w-full max-w-4xl mx-auto"
+            >
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <HoverableAccordionTrigger text={faq.question} />
+
+                  <AccordionContent className="pl-9 text-muted-foreground">
+                    {faq.answer}
+                    {faq.bullets && (
+                      <ul className="list-inside mt-3 list-disc space-y-2">
+                        {faq.bullets.map((bullet, i) => (
+                          <li key={i}>{bullet}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+
+            <div className="mt-12 text-center">
+              <Link
+                href="https://nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/1730027"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" className="gap-2">
+                  <FileSearch className="h-4 w-4" />
+                  Verify Our Credentials
+                </Button>
+              </Link>
+              <p className="mt-4 text-sm text-muted-foreground">
+                All recoveries conducted under Maine PRS License #04592 and NMLS
+                #1730027
+              </p>
+            </div>
+          </div>
         </SectionContainer>
       </section>
 
@@ -354,11 +562,9 @@ export default function Home() {
             and other lenders. Our specialized solutions include:"
           />
           <ul className="list-disc list-inside mx-auto max-w-xl text-muted-foreground space-y-2">
-            <li>Fast asset recovery</li>
-            <li>Secure vehicle storage &amp; 24-hour surveillance</li>
-            <li>Transparent reporting &amp; compliance tracking</li>
-            <li>Real-time status updates via online portal</li>
-            <li>Nationwide skip tracing services</li>
+            {partnershipSolutions.map((solution) => (
+              <li key={solution}>{solution}</li>
+            ))}
           </ul>
           <div className="mt-8">
             <Link href={"#contact"}>
