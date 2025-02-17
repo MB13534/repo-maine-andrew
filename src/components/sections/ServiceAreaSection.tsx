@@ -37,7 +37,7 @@ export default function ServiceAreaSection() {
       </div>
       <ServiceAreaMap hoveredTown={hoveredTown} />
       <Separator />
-      <div className="bg-background p-6 rounded-lg mt-8">
+      <div className="bg-muted p-6 rounded-lg mt-8">
         <h3 className="text-lg font-semibold mb-4 text-foreground">
           Additional Service Areas
         </h3>

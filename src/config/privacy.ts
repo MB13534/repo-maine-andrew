@@ -1,6 +1,6 @@
 export const privacyData = {
   metadata: {
-    title: "Privacy Policy - RepoCoMaine",
+    title: "Privacy Policy - RepoMaine",
     description: "Learn how we handle your data and maintain privacy.",
   },
   title: "Privacy Policy",

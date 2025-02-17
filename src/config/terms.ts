@@ -1,11 +1,11 @@
 export const termsData = {
   metadata: {
-    title: "Terms & Conditions - RepoCoMaine",
+    title: "Terms & Conditions - RepoMaine",
     description: "Read the Terms & Conditions for our repossession services.",
   },
   title: "Terms & Conditions",
   intro:
-    "These Terms & Conditions govern your use of the RepoCoMaine website and services. By accessing or using our services, you agree to be bound by these Terms. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies risus sem, nec luctus erat fermentum eget.",
+    "These Terms & Conditions govern your use of the RepoMaine website and services. By accessing or using our services, you agree to be bound by these Terms. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ultricies risus sem, nec luctus erat fermentum eget.",
   sections: [
     {
       title: "Acceptance of Terms",
@@ -15,7 +15,7 @@ export const termsData = {
     {
       title: "Services & Responsibilities",
       content:
-        "RepoCoMaine provides vehicle and asset repossession services throughout Portland, Maine, and surrounding areas. We operate in full compliance with local, state, and federal laws. It is your responsibility to provide accurate information regarding the repossession request.",
+        "RepoMaine provides vehicle and asset repossession services throughout Portland, Maine, and surrounding areas. We operate in full compliance with local, state, and federal laws. It is your responsibility to provide accurate information regarding the repossession request.",
     },
     {
       title: "Limitations & Liability",
