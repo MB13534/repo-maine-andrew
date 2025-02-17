@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { MainNav } from "@/components/main-nav";
-import { Footer } from "@/components/footer";
-import { ThemeProvider } from "@/components/theme-provider";
+import { MainNav } from "@/components/MainNav";
+import { Footer } from "@/components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { FloatingCTA } from "@/components/FloatingCTA";
 

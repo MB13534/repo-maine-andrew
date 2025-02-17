@@ -24,7 +24,7 @@ import {
   AccordionItem,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { RepossessionForm } from "@/components/repossession-form";
+import { EmailForm } from "@/components/EmailForm";
 import ServiceAreaSection from "@/components/sections/ServiceAreaSection";
 import SectionHeader from "@/components/SectionHeader";
 import {
@@ -817,7 +817,7 @@ export default function Home() {
           />
           <Card className="shadow-md mt-8 bg-card border-2 border-border">
             <CardContent className="p-8">
-              <RepossessionForm />
+              <EmailForm />
             </CardContent>
           </Card>
         </SectionContainer>

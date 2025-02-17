@@ -60,7 +60,7 @@ const formSchema = baseSchema.superRefine((data, ctx) => {
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function RepossessionForm() {
+export function EmailForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
