@@ -197,8 +197,8 @@ const faqs = [
     answer: (
       <>
         Under <strong>Maine Revised Statutes Title 9-A, Part 5</strong>, a
-        repossession <strong>cannot</strong> occur if it results in a 'breach of
-        the peace.' This means:
+        repossession <strong>cannot</strong> occur if it results in a
+        &lsquo;breach of the peace.&rsquo; This means:
       </>
     ),
     bullets: [
