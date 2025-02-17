@@ -411,8 +411,7 @@ export default function Home() {
             Your Trusted Repossession Partner
           </Badge>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
-            Asset Recovery Services
-            <br className="hidden lg:block" />
+            Asset Recovery Services <br className="hidden lg:block" />
             in Portland, Maine
           </h1>
           <p className="mt-6 text-xl sm:text-2xl text-primary-foreground max-w-3xl mx-auto">
