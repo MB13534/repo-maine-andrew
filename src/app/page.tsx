@@ -39,40 +39,71 @@ import {
 import SectionContainer from "@/components/SectionContainer";
 import useWatchDataAttribute from "@/hooks/useWatchDataAttribute";
 
-const licensing = [
+// Licensing Icons
+const licensingIcons = {
+  maineLicense: ShieldCheck,
+  nmlsRegistration: BadgeCheck,
+  uccCompliance: Gavel,
+  title9ACompliance: FileSearch,
+  fdpaCompliance: FileSearch,
+  consumerProtection: ShieldCheck,
+} as const;
+
+// Services Icons
+const serviceIcons = {
+  carRepossession: Truck,
+  boatRecovery: Anchor,
+  rvRepossession: Clock,
+  trailerRecovery: Menu,
+  skipTracing: FileSearch,
+  storageAuction: Landmark,
+} as const;
+
+const whyChooseIcons = {
+  provenExperience: ShieldCheck,
+  zeroRiskPricing: BadgeCheck,
+  legalCompliance: FileSearch,
+  fastResults: Clock,
+} as const;
+
+const licensing: {
+  title: string;
+  detail: string;
+  iconKey: keyof typeof licensingIcons;
+}[] = [
   {
     title: "Maine Repossession License",
-    icon: <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />,
+    iconKey: "maineLicense",
     detail:
       "License #PRS-04592 (Issued by Maine Bureau of Consumer Credit Protection) – required for all repossession companies operating within Maine.",
   },
   {
     title: "NMLS Registration",
-    icon: <BadgeCheck className="mx-auto h-12 w-12 text-primary mb-4" />,
+    iconKey: "nmlsRegistration",
     detail:
       "NMLS #1730027 (Nationwide Multistate Licensing System) – ensures federal compliance with consumer credit and debt collection laws.",
   },
   {
     title: "UCC Article 9 Compliance",
-    icon: <Gavel className="mx-auto h-12 w-12 text-primary mb-4" />,
+    iconKey: "uccCompliance",
     detail:
       "Repossession actions in Maine must follow Uniform Commercial Code (UCC) Article 9, which governs secured transactions, ensuring lawful repossession of collateral.",
   },
   {
     title: "Maine Title 9-A Compliance",
-    icon: <FileSearch className="mx-auto h-12 w-12 text-primary mb-4" />,
+    iconKey: "title9ACompliance",
     detail:
       "Maine Consumer Credit Code (Title 9-A, Part 5) regulates default, repossession, and deficiency balances, ensuring legal compliance in all asset recoveries.",
   },
   {
     title: "Fair Debt Collection Practices Act (FDCPA)",
-    icon: <FileSearch className="mx-auto h-12 w-12 text-primary mb-4" />,
+    iconKey: "fdpaCompliance",
     detail:
       "We adhere to all FDCPA guidelines to prevent unlawful debt collection practices and ensure consumer rights protection.",
   },
   {
     title: "Consumer Protection & Notification Requirements",
-    icon: <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />,
+    iconKey: "consumerProtection",
     detail:
       "Repossession agencies in Maine must comply with notification rules, including the requirement to provide written post-repossession notices to consumers.",
   },
@@ -231,39 +262,43 @@ const faqs = [
   },
 ];
 
-const services = [
+const services: {
+  title: string;
+  description: string;
+  iconKey: keyof typeof serviceIcons;
+}[] = [
   {
     title: "Car Repossession",
-    icon: <Truck className="h-8 w-8" />,
+    iconKey: "carRepossession",
     description:
       "Fast and legally compliant vehicle recovery for lenders and financial institutions.",
   },
   {
     title: "Boat & Marine Recovery",
-    icon: <Anchor className="h-8 w-8" />,
+    iconKey: "boatRecovery",
     description: "Secure retrieval of boats, yachts, and other marine vessels.",
   },
   {
     title: "RV & Camper Repossession",
-    icon: <Clock className="h-8 w-8" />,
+    iconKey: "rvRepossession",
     description:
       "Efficient recovery of large recreational vehicles and campers.",
   },
   {
     title: "Trailer & Equipment Recovery",
-    icon: <Menu className="h-8 w-8" />,
+    iconKey: "trailerRecovery",
     description:
       "Industrial and commercial asset recovery using specialized equipment.",
   },
   {
     title: "Skip Tracing & Asset Location",
-    icon: <FileSearch className="h-8 w-8" />,
+    iconKey: "skipTracing",
     description:
       "Locate hidden or missing assets nationwide with advanced tracing tools.",
   },
   {
     title: "Storage & Auction Services",
-    icon: <Landmark className="h-8 w-8" />,
+    iconKey: "storageAuction",
     description:
       "Safe storage and legally conducted auctions to maximize asset value.",
   },
@@ -300,28 +335,32 @@ const processSteps = [
   },
 ];
 
-const whyChooseRepoMaine = [
+const whyChooseRepoMaine: {
+  title: string;
+  description: string;
+  iconKey: keyof typeof whyChooseIcons;
+}[] = [
   {
     title: "Proven Experience",
-    icon: <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />,
+    iconKey: "provenExperience",
     description:
       "With 10+ years in asset recovery, title processing, and auto lending, we’ve honed the strategies it takes to recover vehicles fast, safely, and legally.",
   },
   {
     title: "Zero-Risk Pricing",
-    icon: <BadgeCheck className="mx-auto h-12 w-12 text-primary mb-4" />,
+    iconKey: "zeroRiskPricing",
     description:
       "You only pay if we successfully recover the asset. No hidden fees and no upfront costs—get in touch for a fully transparent fee structure.",
   },
   {
     title: "Legal & Compliance",
-    icon: <FileSearch className="mx-auto h-12 w-12 text-primary mb-4" />,
+    iconKey: "legalCompliance",
     description:
       "We stay up-to-date with Maine laws and handle repossessions in full compliance—protecting you from legal and regulatory pitfalls.",
   },
   {
     title: "Fast Results",
-    icon: <Clock className="mx-auto h-12 w-12 text-primary mb-4" />,
+    iconKey: "fastResults",
     description:
       "Our streamlined process ensures vehicles are located, recovered, and secured quickly—minimizing your losses.",
   },
@@ -526,26 +565,31 @@ export default function Home() {
             description="Discover how we minimize your risk and maximize asset recoveries."
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 px-3 sm:px-4 md:px-6 lg:px-8">
-            {whyChooseRepoMaine.map((item) => (
-              <motion.div
-                key={item.title}
-                variants={fadeInUp}
-                whileHover={{ scale: 1.05 }}
-                className="flex"
-              >
-                <Card className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    {item.icon}
-                    <CardTitle className="text-xl font-bold">
-                      {item.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">{item.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+            {whyChooseRepoMaine.map((item) => {
+              const IconComponent = whyChooseIcons[item.iconKey];
+              return (
+                <motion.div
+                  key={item.title}
+                  variants={fadeInUp}
+                  whileHover={{ scale: 1.05 }}
+                  className="flex"
+                >
+                  <Card className="hover:shadow-lg transition-shadow">
+                    <CardHeader>
+                      <IconComponent className="mx-auto h-12 w-12 text-primary mb-4" />
+                      <CardTitle className="text-xl font-bold">
+                        {item.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">
+                        {item.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
         </SectionContainer>
       </motion.section>
@@ -620,27 +664,30 @@ export default function Home() {
             initial="hidden"
             animate={isServicesInView ? "visible" : "hidden"}
           >
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ scale: 1.05 }}
-              >
-                <Card className="hover:shadow-lg transition-shadow h-full">
-                  <CardHeader>
-                    <div className="mb-4 text-primary">{service.icon}</div>
-                    <CardTitle className="text-xl font-bold">
-                      {service.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      {service.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+            {services.map((service, index) => {
+              const IconComponent = serviceIcons[service.iconKey];
+              return (
+                <motion.div
+                  key={index}
+                  variants={fadeInUp}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <Card className="hover:shadow-lg transition-shadow h-full">
+                    <CardHeader>
+                      <IconComponent className="h-8 w-8 text-primary mb-4" />
+                      <CardTitle className="text-xl font-bold">
+                        {service.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground">
+                        {service.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </SectionContainer>
       </motion.section>
@@ -724,18 +771,21 @@ export default function Home() {
             animate={isLicensingInView ? "visible" : "hidden"}
             variants={staggerContainer}
           >
-            {licensing.map((item) => (
-              <motion.div
-                key={item.title}
-                variants={slideInRight}
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-6 border rounded-lg border-border hover:shadow-lg transition-shadow"
-              >
-                {item.icon}
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-muted-foreground">{item.detail}</p>
-              </motion.div>
-            ))}
+            {licensing.map((item) => {
+              const IconComponent = licensingIcons[item.iconKey];
+              return (
+                <motion.div
+                  key={item.title}
+                  variants={slideInRight}
+                  whileHover={{ scale: 1.05 }}
+                  className="text-center p-6 border rounded-lg border-border hover:shadow-lg transition-shadow"
+                >
+                  <IconComponent className="mx-auto h-12 w-12 text-primary mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground">{item.detail}</p>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </SectionContainer>
       </section>

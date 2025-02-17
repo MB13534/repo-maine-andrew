@@ -193,14 +193,14 @@ export function RepossessionForm() {
             name="inquiryType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Inquiry Type</FormLabel>
+                <FormLabel htmlFor="inquiryType">Inquiry Type</FormLabel>
                 <FormControl>
                   <Select
                     value={field.value}
                     onValueChange={field.onChange}
                     name={field.name}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger id="inquiryType">
                       <SelectValue
                         placeholder={
                           <span className="text-muted-foreground">
@@ -234,14 +234,14 @@ export function RepossessionForm() {
               name="assetType"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Asset Type</FormLabel>
+                  <FormLabel htmlFor="assetType">Asset Type</FormLabel>
                   <FormControl>
                     <Select
                       value={field.value}
                       onValueChange={field.onChange}
                       name={field.name}
                     >
-                      <SelectTrigger>
+                      <SelectTrigger id="assetType">
                         <SelectValue
                           placeholder={
                             <span className="text-muted-foreground">
