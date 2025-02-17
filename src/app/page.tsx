@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { ComponentPropsWithoutRef, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
@@ -39,7 +39,6 @@ import {
 import SectionContainer from "@/components/SectionContainer";
 import useWatchDataAttribute from "@/hooks/useWatchDataAttribute";
 
-// Data arrays for Licensing, Services, and Process sections
 const licensing = [
   {
     title: "Maine Repossession License",
@@ -158,7 +157,7 @@ const services = [
     title: "Car Repossession",
     icon: <Truck className="h-8 w-8" />,
     description:
-      "Fast and legally compliant vehicle recovery for Landmarks & lenders.",
+      "Fast and legally compliant vehicle recovery for lenders and financial institutions.",
   },
   {
     title: "Boat & Marine Recovery",
@@ -223,14 +222,11 @@ const processSteps = [
 ];
 
 interface HoverableAccordionTriggerProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof AccordionTrigger>,
-    "children"
-  > {
+  extends Omit<ComponentPropsWithoutRef<typeof AccordionTrigger>, "children"> {
   text: string;
 }
 
-function HoverableAccordionTrigger({
+export function HoverableAccordionTrigger({
   text,
   ...props
 }: HoverableAccordionTriggerProps) {
@@ -263,8 +259,10 @@ function HoverableAccordionTrigger({
   );
 }
 
+// ---------------------
+// MAIN HOME COMPONENT
+// ---------------------
 export default function Home() {
-  // Refs for sections that need in-view triggers
   const aboutRef = useRef(null);
   const servicesRef = useRef(null);
   const licensingRef = useRef(null);
@@ -283,7 +281,7 @@ export default function Home() {
     <div className="flex flex-col overflow-hidden">
       {/* HERO SECTION */}
       <motion.section
-        className="relative min-h-screen flex items-center justify-center bg-muted text-foreground"
+        className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center bg-muted text-foreground"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -305,25 +303,27 @@ export default function Home() {
             className="mb-6 p-2 bg-primary/40 text-primary-foreground border-primary"
           >
             <ShieldCheck className="mr-2 h-4 w-4" />
-            Licensed &amp; Insured
+            Your Trusted Repossession Partner
           </Badge>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
-            Professional Asset Repossession
-            <br className="hidden lg:block" /> Services in Portland, ME
+            Asset Recovery Services
+            <br className="hidden lg:block" />
+            in Portland, Maine
           </h1>
           <p className="mt-6 text-xl sm:text-2xl text-primary-foreground max-w-3xl mx-auto">
-            Fast, Compliant Repossession Solutions for Financial Institutions
-            &amp; Lenders
+            Fast, **Risk-Free** Repossession Solutions for Lenders &amp; Auto
+            Finance Providers
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <motion.div whileHover={{ scale: 1.05 }}>
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-lg px-8 py-6"
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                Request Repossession Now
-              </Button>
+              <Link href={"#contact"}>
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-lg px-8 py-6"
+                >
+                  Request Repossession Now
+                </Button>
+              </Link>
             </motion.div>
             <Link href={"#about"}>
               <Button
@@ -351,28 +351,37 @@ export default function Home() {
         <SectionContainer className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 text-center sm:text-left">
             <Badge variant="outline" className="text-primary p-2">
-              Since 2010
+              A Division of A.C. Enterprises LLC
             </Badge>
-            <SectionHeader title="Trusted Repossession Experts" align="left" />
-
+            <SectionHeader
+              title="About RepoMaine"
+              align="left"
+              className="mb-4"
+            />
             <p className="text-lg text-muted-foreground">
-              With over a decade of experience, <strong>RepoCoMaine</strong> has
-              established itself as Maine&apos;s premier asset recovery service.
-              Our licensed professionals combine cutting-edge technology with
-              strict legal compliance to deliver efficient, ethical repossession
-              services.
+              <strong className="text-foreground">RepoMaine</strong> is the
+              repossession division of{" "}
+              <strong className="text-foreground">A.C. Enterprises LLC</strong>{" "}
+              – founded and led by{" "}
+              <strong className="text-foreground">Andrew Chaisson</strong>, an
+              industry expert with over a decade of experience in auto finance,
+              asset recovery, and title processing. We combine our deep
+              understanding of Maine&apos;s repossession regulations with
+              efficient, ethical practices to help lenders recover assets
+              smoothly and safely.
             </p>
             <p className="text-lg text-muted-foreground">
-              Our mission is to provide secure and fully compliant repossession
-              services that protect both our clients and debtors under all
-              applicable laws. We value integrity, transparency, and efficiency
-              in every recovery.
+              Our mission is simple: deliver **fast, cost-effective, and
+              risk-free repossession solutions** to financial institutions,
+              dealers, and private lenders. We handle everything from skip
+              tracing to secure storage—so you can focus on your core business
+              while we handle recoveries.
             </p>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 mt-6">
               <div className="p-4 bg-muted rounded-lg text-center">
-                <div className="text-3xl font-bold text-primary">2,500+</div>
+                <div className="text-3xl font-bold text-primary">10+ Yrs</div>
                 <div className="text-sm text-muted-foreground">
-                  Successful Recoveries
+                  Industry Experience
                 </div>
               </div>
               <div className="p-4 bg-muted rounded-lg text-center">
@@ -394,9 +403,184 @@ export default function Home() {
         </SectionContainer>
       </motion.section>
 
+      {/* RISK-FREE / "WHY CHOOSE US" SECTION */}
+      <motion.section
+        className="py-24 bg-muted text-center text-foreground"
+        id="why-repomaine"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={slideInLeft}
+      >
+        <SectionContainer>
+          <SectionHeader
+            title="Why Choose RepoMaine?"
+            description="Discover how we minimize your risk and maximize asset recoveries."
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 px-3 sm:px-4 md:px-6 lg:px-8">
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />
+                <CardTitle className="text-xl font-bold">
+                  Proven Experience
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  With 10+ years in asset recovery, title processing, and auto
+                  lending, we&apos;ve honed the strategies it takes to recover
+                  vehicles fast, safely, and legally.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <BadgeCheck className="mx-auto h-12 w-12 text-primary mb-4" />
+                <CardTitle className="text-xl font-bold">
+                  Zero-Risk Pricing
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  You only pay if we successfully recover the asset. **No hidden
+                  fees** and **no upfront costs**—get in touch for a fully
+                  transparent fee structure.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <FileSearch className="mx-auto h-12 w-12 text-primary mb-4" />
+                <CardTitle className="text-xl font-bold">
+                  Legal &amp; Compliance
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  We stay up-to-date with Maine laws and handle repossessions in
+                  full compliance—protecting you from legal and regulatory
+                  pitfalls.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <Clock className="mx-auto h-12 w-12 text-primary mb-4" />
+                <CardTitle className="text-xl font-bold">
+                  Fast Results
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Our streamlined process ensures vehicles are located,
+                  recovered, and secured quickly—minimizing your losses.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </SectionContainer>
+      </motion.section>
+
+      {/* PROCESS SECTION  */}
+      <motion.section
+        id="process"
+        className="py-24 bg-background text-foreground"
+        ref={processRef}
+        initial="hidden"
+        animate="visible"
+        variants={slideInRight}
+      >
+        <SectionContainer>
+          <SectionHeader
+            title="Simple 4-Step Process"
+            description="Our repossession process is straightforward and efficient."
+          />
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 px-3 sm:px-4 md:px-6 lg:px-8 mt-10"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+          >
+            {processSteps.map((step, index) => (
+              <motion.div
+                key={step.title}
+                variants={fadeInUp}
+                whileHover={{ scale: 1.05 }}
+                className="text-center p-6 border-2 rounded-lg border-primary hover:shadow-lg transition-shadow"
+              >
+                <div className="w-16 h-16 bg-primary rounded-full mx-auto mb-4 flex items-center justify-center text-primary-foreground text-xl font-bold">
+                  {index + 1}
+                </div>
+                <h3 className="text-lg font-semibold mb-2 text-foreground">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {step.description}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+          <p className="mt-8 text-center text-muted-foreground max-w-2xl mx-auto">
+            We offer a{" "}
+            <strong className="text-foreground">
+              risk-free, success-based model
+            </strong>
+            . If we do not recover your asset, you pay nothing.
+            <br />
+            Reach out for a **fully transparent** fee structure—no hidden costs.
+          </p>
+        </SectionContainer>
+      </motion.section>
+
+      {/* SERVICES SECTION */}
+      <motion.section
+        id="services"
+        className="py-24 bg-muted text-foreground"
+        ref={servicesRef}
+        initial="hidden"
+        animate={isServicesInView ? "visible" : "hidden"}
+      >
+        <SectionContainer>
+          <motion.div variants={slideInRight}>
+            <SectionHeader
+              title="Services We Offer"
+              description="Comprehensive asset recovery solutions tailored for financial institutions and lenders."
+            />
+          </motion.div>
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 px-3 sm:px-4 md:px-6 lg:px-8 mt-10"
+            variants={staggerContainer}
+            initial="hidden"
+            animate={isServicesInView ? "visible" : "hidden"}
+          >
+            {services.map((service, index) => (
+              <motion.div key={index} variants={fadeInUp}>
+                <Card className="hover:shadow-lg transition-shadow h-full">
+                  <CardHeader>
+                    <div className="mb-4 text-primary">{service.icon}</div>
+                    <CardTitle className="text-xl font-bold">
+                      {service.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      {service.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </SectionContainer>
+      </motion.section>
+
       {/* SERVICE AREA MAP  */}
       <motion.section
-        className="py-24 bg-muted"
+        id="service-areas"
+        className="py-24 bg-background"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -405,10 +589,39 @@ export default function Home() {
         <ServiceAreaSection />
       </motion.section>
 
+      {/* PARTNERSHIPS SECTION  */}
+      <motion.section
+        id="partner-solutions"
+        className="py-24 bg-muted text-center text-foreground"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={slideInLeft}
+      >
+        <SectionContainer>
+          <SectionHeader
+            title="Partnerships & Financial Institution Services"
+            description="We’ve built long-term relationships with lenders, credit unions, and other institutions. Our specialized solutions include:"
+          />
+          <ul className="list-disc list-inside mx-auto max-w-xl text-muted-foreground space-y-2">
+            {partnershipSolutions.map((solution) => (
+              <li key={solution}>{solution}</li>
+            ))}
+          </ul>
+          <div className="mt-8">
+            <Link href={"#contact"}>
+              <Button className="bg-primary hover:bg-primary/80 px-6 py-3 text-lg text-primary-foreground transition">
+                Partner With Us Today
+              </Button>
+            </Link>
+          </div>
+        </SectionContainer>
+      </motion.section>
+
       {/* LICENSING & COMPLIANCE SECTION */}
       <section
         id="licensing"
-        className="py-24 bg-background text-center text-foreground"
+        className="py-24 bg-background text-foreground text-center"
         ref={licensingRef}
       >
         <SectionContainer>
@@ -419,7 +632,7 @@ export default function Home() {
           >
             <SectionHeader
               title="Licensing & Compliance"
-              description="We adhere strictly to federal and state regulations, ensuring
+              description="We adhere strictly to federal and state regulations to ensure
               every repossession follows proper legal procedures."
             />
             <Link
@@ -455,173 +668,61 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
+        </SectionContainer>
+      </section>
 
-          <div id="faq" className="py-12 bg-background">
-            <SectionHeader
-              title="FAQ"
-              description="Everything you need to know about repossession licensing in Maine and how it affects you."
-            />
-            <Accordion
-              type="single"
-              collapsible
-              className="w-full max-w-4xl mx-auto"
+      <section id="faq" className="py-24 bg-muted text-center text-foreground">
+        <SectionContainer>
+          <SectionHeader
+            title="FAQ"
+            description="Everything you need to know about repossession licensing in Maine and how it affects you."
+          />
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full max-w-4xl mx-auto"
+          >
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`}>
+                <HoverableAccordionTrigger text={faq.question} />
+
+                <AccordionContent className="pl-9 text-muted-foreground">
+                  {faq.answer}
+                  {faq.bullets && (
+                    <ul className="list-inside mt-3 list-disc space-y-2">
+                      {faq.bullets.map((bullet, i) => (
+                        <li key={i}>{bullet}</li>
+                      ))}
+                    </ul>
+                  )}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+
+          <div className="mt-12 text-center">
+            <Link
+              href="https://nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/1730027"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              {faqs.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index}`}>
-                  <HoverableAccordionTrigger text={faq.question} />
-
-                  <AccordionContent className="pl-9 text-muted-foreground">
-                    {faq.answer}
-                    {faq.bullets && (
-                      <ul className="list-inside mt-3 list-disc space-y-2">
-                        {faq.bullets.map((bullet, i) => (
-                          <li key={i}>{bullet}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-
-            <div className="mt-12 text-center">
-              <Link
-                href="https://nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/1730027"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="outline" className="gap-2">
-                  <FileSearch className="h-4 w-4" />
-                  Verify Our Credentials
-                </Button>
-              </Link>
-              <p className="mt-4 text-sm text-muted-foreground">
-                All recoveries conducted under Maine PRS License #04592 and NMLS
-                #1730027
-              </p>
-            </div>
+              <Button variant="outline">
+                <FileSearch className="h-4 w-4" />
+                Verify Our Credentials
+              </Button>
+            </Link>
+            <p className="mt-4 text-sm text-muted-foreground">
+              All recoveries conducted under Maine PRS License #04592 and NMLS
+              #1730027
+            </p>
           </div>
         </SectionContainer>
       </section>
 
-      {/* SERVICES SECTION */}
-      <motion.section
-        id="services"
-        className="py-24 bg-muted"
-        ref={servicesRef}
-        initial="hidden"
-        animate={isServicesInView ? "visible" : "hidden"}
-      >
-        <SectionContainer>
-          <motion.div variants={slideInRight}>
-            <SectionHeader
-              title="Services We Offer"
-              description="Comprehensive asset recovery solutions tailored for financial institutions and lenders."
-            />
-          </motion.div>
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 px-3 sm:px-4 md:px-6 lg:px-8"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={isServicesInView ? "visible" : "hidden"}
-          >
-            {services.map((service, index) => (
-              <motion.div key={index} variants={fadeInUp}>
-                <Card className="hover:shadow-lg transition-shadow h-full">
-                  <CardHeader>
-                    <div className="mb-4 text-primary">{service.icon}</div>
-                    <CardTitle className="text-xl font-bold">
-                      {service.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">
-                      {service.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </SectionContainer>
-      </motion.section>
-
-      {/* PARTNERSHIPS SECTION  */}
-      <motion.section
-        id="partnerships"
-        className="py-24 bg-background text-center text-foreground"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={slideInLeft}
-      >
-        <SectionContainer>
-          <SectionHeader
-            title="Partnerships & Financial Institution Services"
-            description="We’ve built long-term relationships with Landmarks, credit unions,
-            and other lenders. Our specialized solutions include:"
-          />
-          <ul className="list-disc list-inside mx-auto max-w-xl text-muted-foreground space-y-2">
-            {partnershipSolutions.map((solution) => (
-              <li key={solution}>{solution}</li>
-            ))}
-          </ul>
-          <div className="mt-8">
-            <Link href={"#contact"}>
-              <Button className="bg-primary hover:bg-primary/80 px-6 py-3 text-lg text-primary-foreground transition">
-                Partner With Us Today
-              </Button>
-            </Link>
-          </div>
-        </SectionContainer>
-      </motion.section>
-
-      {/* PROCESS SECTION  */}
-      <motion.section
-        id="process"
-        className="py-24 bg-muted"
-        ref={processRef}
-        initial="hidden"
-        animate="visible"
-        variants={slideInRight}
-      >
-        <SectionContainer>
-          <SectionHeader
-            title="Simple 4-Step Process"
-            description="Our repossession process is straightforward and efficient."
-          />
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 px-3 sm:px-4 md:px-6 lg:px-8"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-          >
-            {processSteps.map((step, index) => (
-              <motion.div
-                key={step.title}
-                variants={fadeInUp}
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-6 border-2 rounded-lg border-primary hover:shadow-lg transition-shadow"
-              >
-                <div className="w-16 h-16 bg-primary rounded-full mx-auto mb-4 flex items-center justify-center text-primary-foreground text-xl font-bold">
-                  {index + 1}
-                </div>
-                <h3 className="text-lg font-semibold mb-2 text-foreground">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {step.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </SectionContainer>
-      </motion.section>
-
       {/* CONTACT SECTION */}
       <motion.section
         id="contact"
-        className="py-24 bg-background"
+        className="py-24 bg-background text-foreground"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -629,11 +730,10 @@ export default function Home() {
       >
         <SectionContainer className="text-center">
           <SectionHeader
-            title="Contact Our Recovery Team"
-            description="Ready to start? Fill out the form or call us to speak with one of
-              our experts. Our team typically responds within 24 hours."
+            title="Ready to Recover Your Assets?"
+            description="Fill out the form or call us to speak with one of our experts. Our team typically responds within 24 hours."
           />
-          <Card className="shadow-md mt-8">
+          <Card className="shadow-md mt-8 bg-card border-2 border-border">
             <CardContent className="p-8">
               <RepossessionForm />
             </CardContent>
@@ -644,7 +744,7 @@ export default function Home() {
       {/* EMERGENCY SECTION  */}
       <motion.section
         id="emergency"
-        className="py-24 bg-muted text-center px-3 sm:px-4 md:px-6 lg:px-8"
+        className="py-24 bg-muted text-foreground text-center px-3 sm:px-4 md:px-6 lg:px-8"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -653,14 +753,13 @@ export default function Home() {
         <SectionContainer>
           <SectionHeader
             title="Emergency & 24-Hour Repossession Services"
-            description="Need immediate assistance? We provide 24/7 emergency repossession
-            services."
+            description="Need immediate assistance? We provide 24/7 emergency repossession services."
           />
           <Link href="tel:1234567890">
             <Button
               variant="destructive"
               size="lg"
-              className="text-lg inline-flex items-center gap-2"
+              className="text-lg font-semibold"
             >
               <Phone className="h-5 w-5" />
               Call Us Now (24/7)
@@ -686,12 +785,13 @@ export default function Home() {
             Reach out now to learn more about our process and how we can assist
             you.
           </p>
-          <Link href={"#contact"}>
+          <Link href="tel:1234567890">
             <Button
               variant="secondary"
               size="lg"
               className="text-lg font-semibold"
             >
+              <Phone className="h-5 w-5" />
               Speak With an Expert
             </Button>
           </Link>

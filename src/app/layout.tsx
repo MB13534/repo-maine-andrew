@@ -6,6 +6,7 @@ import { MainNav } from "@/components/main-nav";
 import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
+import { FloatingCTA } from "@/components/FloatingCTA";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RepoCoMaine | Vehicle Repossession Services",
+  title: "RepoMaine | Vehicle Repossession Services",
   description:
     "Trusted vehicle repossession services in Portland, Maine. We specialize in auto, boat, RV, and equipment recovery for financial institutions and lenders.",
   keywords: [
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
     "repo business Portland ME",
   ],
   openGraph: {
-    title: "RepoCoMaine | Professional Vehicle Repossession",
+    title: "RepoMaine | Professional Vehicle Repossession",
     description:
       "Reliable, legally compliant vehicle repossession services in Maine. Serving banks, credit unions, and financial institutions.",
     type: "website",
@@ -58,6 +59,7 @@ export default function RootLayout({
             <div className="flex min-h-screen flex-col">
               <MainNav />
               <main className="flex-1">{children}</main>
+              <FloatingCTA />
               <Footer />
             </div>
           </ThemeProvider>

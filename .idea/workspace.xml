@@ -5,8 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="faq section&#10;more color themes&#10;useWatchDataAttribute">
+      <change afterPath="$PROJECT_DIR$/src/app/api/contact/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/FloatingCTA.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/main-nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main-nav.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/repossession-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/repossession-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/sections/ServiceAreaSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sections/ServiceAreaSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/legal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/legal.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/nav.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/nav.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/privacy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/privacy.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/terms.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/terms.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

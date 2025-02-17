@@ -1,6 +1,6 @@
 export const legalData = {
   metadata: {
-    title: "Legal Disclaimers - RepoCoMaine",
+    title: "Legal Disclaimers - RepoMaine",
     description:
       "Important legal information about our repossession services and website usage.",
   },

@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuLink,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
@@ -15,55 +17,90 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { motion } from "framer-motion";
-import { navItems } from "@/config/nav";
+import { navSections } from "@/config/nav";
+import { useState } from "react";
+import { ComponentProps } from "react";
+
+interface ListItemProps extends ComponentProps<"a"> {
+  title: string;
+  href: string;
+  children: React.ReactNode;
+}
+
+function ListItem({ title, href, children, ...props }: ListItemProps) {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <Link
+          href={href}
+          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors
+            hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm text-muted-foreground">
+            {children}
+          </p>
+        </Link>
+      </NavigationMenuLink>
+    </li>
+  );
+}
 
 export function MainNav() {
+  const router = useRouter();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      {/* The outer div spans the full viewport width, while content is maxed at a container size */}
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2">
-          <Image
-            src="/logo.png"
-            alt="RepoCoMaine"
-            width={40}
-            height={40}
-            className="rounded-lg"
-          />
-          <span className="text-xl font-bold">RepoCoMaine</span>
+          <span className="text-xl font-bold">RepoMaine</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          <NavigationMenu>
-            <NavigationMenuList>
-              {navItems.map((item) => (
-                <NavigationMenuItem key={item.href}>
-                  <Link href={item.href} legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      {item.label}
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
-        </nav>
+        <NavigationMenu className="hidden md:flex items-center">
+          <NavigationMenuList>
+            {navSections.map((section) => (
+              <NavigationMenuItem key={section.label}>
+                <NavigationMenuTrigger
+                  className={navigationMenuTriggerStyle()}
+                  onClick={() => router.push(section.items[0].href)}
+                >
+                  {section.label}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul
+                    className="
+                      grid gap-3 p-4
+                      md:w-[500px]
+                      md:grid-cols-2
+                      items-start
+                    "
+                  >
+                    {section.items.map((item) => (
+                      <ListItem
+                        key={item.href}
+                        title={item.title}
+                        href={item.href}
+                      >
+                        {item.description}
+                      </ListItem>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            ))}
+          </NavigationMenuList>
+        </NavigationMenu>
 
-        {/* Right Section: Theme Toggle, Desktop Request Button & Mobile Drawer */}
+        {/* Right Section: Theme Toggle & Mobile Drawer */}
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          <motion.div whileHover={{ scale: 1.05 }}>
-            <Button asChild className="hidden md:flex">
-              <Link href={"#contact"}>Request Repossession</Link>
-            </Button>
-          </motion.div>
+
           {/* Mobile Menu Trigger */}
-          <Sheet>
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden -mr-2">
                 <Menu className="h-6 w-6" />
@@ -79,16 +116,31 @@ export function MainNav() {
                   Use this menu to navigate the site
                 </VisuallyHidden>
               </DialogDescription>
-
               <div className="flex flex-col gap-6 pt-8">
-                {navItems.map((item) => (
-                  <Link key={item.href} href={item.href}>
-                    {item.label}
-                  </Link>
+                {/* On mobile, flatten the navigation */}
+                {navSections.map((section) => (
+                  <div key={section.label} className="flex flex-col gap-2">
+                    <span className="font-bold">{section.label}</span>
+                    {section.items.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setMobileOpen(false)}
+                        className="text-muted-foreground pl-4 text-sm"
+                      >
+                        {item.title}
+                      </Link>
+                    ))}
+                  </div>
                 ))}
-                <Button asChild className="mt-4">
-                  <Link href={"#contact"}>Request Repossession</Link>
-                </Button>
+                <Link href={"#contact"} onClick={() => setMobileOpen(false)}>
+                  <Button
+                    size="lg"
+                    className="w-full shadow-lg bg-primary hover:bg-primary/90 gap-2"
+                  >
+                    Request Repossession
+                  </Button>
+                </Link>
               </div>
             </SheetContent>
           </Sheet>
