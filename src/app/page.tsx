@@ -226,7 +226,7 @@ interface HoverableAccordionTriggerProps
   text: string;
 }
 
-export function HoverableAccordionTrigger({
+function HoverableAccordionTrigger({
   text,
   ...props
 }: HoverableAccordionTriggerProps) {
