@@ -516,7 +516,7 @@ export default function Home() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={slideInLeft}
+        variants={slideInRight}
       >
         <SectionContainer>
           <SectionHeader
@@ -560,7 +560,7 @@ export default function Home() {
         ref={processRef}
         initial="hidden"
         animate="visible"
-        variants={slideInRight}
+        variants={slideInLeft}
       >
         <SectionContainer>
           <SectionHeader
@@ -658,7 +658,7 @@ export default function Home() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={scaleIn}
+        variants={slideInLeft}
       >
         <ServiceAreaSection />
       </motion.section>
@@ -670,7 +670,7 @@ export default function Home() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={slideInLeft}
+        variants={slideInRight}
       >
         <SectionContainer>
           <SectionHeader
@@ -749,9 +749,13 @@ export default function Home() {
         </SectionContainer>
       </section>
 
-      <section
+      <motion.section
         id="licensing-faq"
         className="py-24 bg-muted text-center text-foreground"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={slideInRight}
       >
         <SectionContainer>
           <SectionHeader
@@ -798,7 +802,7 @@ export default function Home() {
             </p>
           </div>
         </SectionContainer>
-      </section>
+      </motion.section>
 
       {/* CONTACT SECTION */}
       <motion.section
@@ -807,7 +811,7 @@ export default function Home() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={scaleIn}
+        variants={slideInLeft}
       >
         <SectionContainer className="text-center">
           <SectionHeader
@@ -829,7 +833,7 @@ export default function Home() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={slideInLeft}
+        variants={slideInRight}
       >
         <SectionContainer>
           <SectionHeader
@@ -855,7 +859,7 @@ export default function Home() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={slideInRight}
+        variants={scaleIn}
       >
         <div className="container mx-auto max-w-2xl px-3 sm:px-4 md:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-semibold mb-4">

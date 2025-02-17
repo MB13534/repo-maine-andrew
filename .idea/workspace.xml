@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="file naming conventions">
+    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="typo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
     </list>
@@ -235,7 +235,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739770727873</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="typo">
+      <option name="closed" value="true" />
+      <created>1739806067255</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1739806067255</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,7 +276,8 @@
     <MESSAGE value="chores" />
     <MESSAGE value="lint" />
     <MESSAGE value="file naming conventions" />
-    <option name="LAST_COMMIT_MESSAGE" value="file naming conventions" />
+    <MESSAGE value="typo" />
+    <option name="LAST_COMMIT_MESSAGE" value="typo" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
