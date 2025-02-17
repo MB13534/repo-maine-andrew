@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { capitalizeFirstLetter } from "@/lib/utils";
 
 export async function POST(req: Request) {
   try {
     const data = await req.json();
 
-    // 1) Configure nodemailer
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT),
@@ -16,48 +16,58 @@ export async function POST(req: Request) {
       },
     });
 
-    // 2) Send email to YOU (the business)
+    // Email to business with inquiry details
     await transporter.sendMail({
       from: `"RepoMaine Contact Form" <${process.env.SMTP_EMAIL}>`,
       replyTo: `${data.name} <${data.email}>`,
-      to: process.env.SMTP_EMAIL,
-      subject: "ONLINE FORM SUBMISSION",
+      to: process.env.SMTP_EMAIL, // e.g. contact@repomaine.com
+      subject: `Online Form Submission: ${capitalizeFirstLetter(data.inquiryType)}`,
       html: `
-        <h2>New Repossession Request</h2>
+        <h2>Online Form Submission: ${capitalizeFirstLetter(data.inquiryType)}</h2>
+        <p><strong>Inquiry Type:</strong> ${capitalizeFirstLetter(data.inquiryType)}</p>
         <p><strong>Name:</strong> ${data.name}</p>
         <p><strong>Email:</strong> ${data.email}</p>
         <p><strong>Phone:</strong> ${data.phone}</p>
-        <p><strong>Asset Type:</strong> ${data.assetType}</p>
-        <p><strong>Last Known Location:</strong> ${data.assetLocation}</p>
+        ${
+          data.inquiryType === "repossession"
+            ? `<p><strong>Asset Type:</strong> ${data.assetType}</p>
+               <p><strong>Last Known Location:</strong> ${data.assetLocation}</p>`
+            : ""
+        }
         <p><strong>Additional Info:</strong> ${data.additionalInfo || "N/A"}</p>
       `,
     });
 
-    // 3) Send a CONFIRMATION email to the USER
+    // Confirmation email to the user
     await transporter.sendMail({
       from: `"RepoMaine" <${process.env.SMTP_EMAIL}>`,
       to: data.email,
-      subject: "We Received Your Repossession Request",
+      subject: `Thank You for Your ${capitalizeFirstLetter(data.inquiryType)} Inquiry`,
       html: `
         <h2>Thank you, ${data.name}!</h2>
         <p>
-          We appreciate you contacting RepoMaine. One of our representatives 
-          will review your request and get back to you as soon as possible.
+          We have received your <strong>${data.inquiryType}</strong> inquiry.
+          One of our representatives will get back to you shortly.
         </p>
-        <p><strong>Here’s a copy of your submission:</strong></p>
+        <h3>Your Submission:</h3>
         <ul>
+          <li><strong>Inquiry Type:</strong> ${capitalizeFirstLetter(data.inquiryType)}</li>
+          <li><strong>Name:</strong> ${data.name}</li>
+          <li><strong>Email:</strong> ${data.email}</li>
           <li><strong>Phone:</strong> ${data.phone}</li>
-          <li><strong>Asset Type:</strong> ${data.assetType}</li>
-          <li><strong>Last Known Location:</strong> ${data.assetLocation}</li>
+          ${
+            data.inquiryType === "repossession"
+              ? `<li><strong>Asset Type:</strong> ${data.assetType}</li>
+                 <li><strong>Last Known Location:</strong> ${data.assetLocation}</li>`
+              : ""
+          }
           <li><strong>Additional Info:</strong> ${data.additionalInfo || "N/A"}</li>
         </ul>
-        <p>If you have any additional details or questions, feel free to reply 
-           directly to this email.</p>
+        <p>If you have any additional questions or details, feel free to reply directly to this email.</p>
         <p>– The RepoMaine Team</p>
       `,
     });
 
-    // Return success
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Error sending email:", err);

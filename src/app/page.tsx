@@ -495,7 +495,7 @@ export default function Home() {
       >
         <SectionContainer>
           <SectionHeader
-            title="Simple 4-Step Process"
+            title="Our Simple 4-Step Process"
             description="Our repossession process is straightforward and efficient."
           />
           <motion.div
@@ -591,7 +591,7 @@ export default function Home() {
 
       {/* PARTNERSHIPS SECTION  */}
       <motion.section
-        id="partner-solutions"
+        id="partnership-services"
         className="py-24 bg-muted text-center text-foreground"
         initial="hidden"
         whileInView="visible"
@@ -671,10 +671,13 @@ export default function Home() {
         </SectionContainer>
       </section>
 
-      <section id="faq" className="py-24 bg-muted text-center text-foreground">
+      <section
+        id="licensing-faq"
+        className="py-24 bg-muted text-center text-foreground"
+      >
         <SectionContainer>
           <SectionHeader
-            title="FAQ"
+            title="Licensing FAQ"
             description="Everything you need to know about repossession licensing in Maine and how it affects you."
           />
           <Accordion

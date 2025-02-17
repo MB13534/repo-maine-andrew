@@ -1,8 +1,6 @@
-"use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,17 +22,42 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-// 1) Define our form schema
-const formSchema = z.object({
+// Define our base schema
+const baseSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  assetType: z.string().min(2, "Please select an asset type"),
-  assetLocation: z.string().min(2, "Please provide a location"),
+  inquiryType: z.enum(["repossession", "general", "partnership"], {
+    errorMap: () => ({ message: "Please select an inquiry type" }),
+  }),
+  // Optional by default:
+  assetType: z.string().optional(),
+  assetLocation: z.string().optional(),
   additionalInfo: z.string().optional(),
 });
 
-// 2) Create a typed form interface
+// Refine the schema so that if inquiryType is "repossession",
+// both assetType and assetLocation are required.
+const formSchema = baseSchema.superRefine((data, ctx) => {
+  if (data.inquiryType === "repossession") {
+    if (!data.assetType) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["assetType"],
+        message: "Asset Type is required for repossession requests.",
+      });
+    }
+    if (!data.assetLocation) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["assetLocation"],
+        message:
+          "Last Known Asset Location is required for repossession requests.",
+      });
+    }
+  }
+});
+
 type FormValues = z.infer<typeof formSchema>;
 
 export function RepossessionForm() {
@@ -42,20 +65,29 @@ export function RepossessionForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  // 3) Setup react-hook-form with Zod
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       email: "",
       phone: "",
+      inquiryType: "repossession",
       assetType: "",
       assetLocation: "",
       additionalInfo: "",
     },
   });
 
-  // 4) Handle form submission
+  // Watch the inquiryType to conditionally render asset fields
+  const inquiryType = useWatch({ control: form.control, name: "inquiryType" });
+
+  useEffect(() => {
+    if (inquiryType !== "repossession") {
+      form.setValue("assetType", "");
+      form.setValue("assetLocation", "");
+    }
+  }, [inquiryType, form]);
+
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
     setErrorMessage("");
@@ -78,8 +110,9 @@ export function RepossessionForm() {
         return;
       }
 
-      // Success!
-      setSuccessMessage("Your request was submitted successfully!");
+      setSuccessMessage(
+        "Your request was submitted successfully! We will be in touch soon.",
+      );
       form.reset();
     } catch (err) {
       console.error("Error sending form:", err);
@@ -94,9 +127,8 @@ export function RepossessionForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        {/* Top Row Fields */}
         <div className="grid md:grid-cols-2 gap-6">
-          {/* Name */}
+          {/* Full Name */}
           <FormField
             control={form.control}
             name="name"
@@ -155,34 +187,36 @@ export function RepossessionForm() {
             )}
           />
 
-          {/* Asset Type */}
+          {/* Inquiry Type */}
           <FormField
             control={form.control}
-            name="assetType"
+            name="inquiryType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel htmlFor="assetType">Asset Type</FormLabel>
+                <FormLabel>Inquiry Type</FormLabel>
                 <FormControl>
                   <Select
                     value={field.value}
                     onValueChange={field.onChange}
                     name={field.name}
                   >
-                    <SelectTrigger id="assetType">
+                    <SelectTrigger>
                       <SelectValue
                         placeholder={
                           <span className="text-muted-foreground">
-                            Select Asset Type
+                            Select Inquiry Type
                           </span>
                         }
                       />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="car">Automobile</SelectItem>
-                      <SelectItem value="boat">Boat/Marine</SelectItem>
-                      <SelectItem value="rv">RV/Camper</SelectItem>
-                      <SelectItem value="equipment">Equipment</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="repossession">
+                        Repossession Request
+                      </SelectItem>
+                      <SelectItem value="general">General Inquiry</SelectItem>
+                      <SelectItem value="partnership">
+                        Partnership Inquiry
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </FormControl>
@@ -192,26 +226,65 @@ export function RepossessionForm() {
           />
         </div>
 
-        {/* Last Known Location */}
-        <FormField
-          control={form.control}
-          name="assetLocation"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Last Known Asset Location</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Enter address or city/state"
-                  {...field}
-                  autoComplete="street-address"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {/* Conditionally render asset-specific fields if inquiryType is repossession */}
+        {inquiryType === "repossession" && (
+          <>
+            <FormField
+              control={form.control}
+              name="assetType"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Asset Type</FormLabel>
+                  <FormControl>
+                    <Select
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      name={field.name}
+                    >
+                      <SelectTrigger>
+                        <SelectValue
+                          placeholder={
+                            <span className="text-muted-foreground">
+                              Select Asset Type
+                            </span>
+                          }
+                        />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="car">Automobile</SelectItem>
+                        <SelectItem value="boat">Boat/Marine</SelectItem>
+                        <SelectItem value="rv">RV/Camper</SelectItem>
+                        <SelectItem value="equipment">Equipment</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        {/* Additional Info */}
+            <FormField
+              control={form.control}
+              name="assetLocation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Last Known Asset Location</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter address or city/state"
+                      {...field}
+                      autoComplete="street-address"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </>
+        )}
+
+        {/* Additional Information */}
         <FormField
           control={form.control}
           name="additionalInfo"
@@ -220,7 +293,7 @@ export function RepossessionForm() {
               <FormLabel>Additional Information</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Any special instructions or details about the asset..."
+                  placeholder="Any special instructions, questions, or details..."
                   className="resize-none"
                   {...field}
                   autoComplete="off"
@@ -231,18 +304,15 @@ export function RepossessionForm() {
           )}
         />
 
-        {/* Error & Success Messages */}
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         {successMessage && <p className="text-green-600">{successMessage}</p>}
 
-        {/* Submit Button */}
         <Button type="submit" className="w-full gap-2" disabled={isSubmitting}>
           {isSubmitting ? (
             "Submitting..."
           ) : (
             <>
-              <Send className="h-4 w-4" />
-              Submit Repossession Request
+              <Send className="h-4 w-4" /> Submit Inquiry
             </>
           )}
         </Button>

@@ -44,8 +44,8 @@ export const navSections: NavSection[] = [
         description: "Check which regions we cover in Maine.",
       },
       {
-        title: "Partner Solutions",
-        href: "#partner-solutions",
+        title: "Partnership Services",
+        href: "#partnership-services",
         description: "Learn about partnerships for lenders and institutions.",
       },
     ],
@@ -61,7 +61,7 @@ export const navSections: NavSection[] = [
       },
       {
         title: "FAQ",
-        href: "#faq",
+        href: "#licensing-faq",
         description: "Answers to common repossession questions.",
       },
     ],
