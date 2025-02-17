@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentPropsWithoutRef, useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  Info,
   ShieldCheck,
   Phone,
   Menu,
@@ -23,7 +22,6 @@ import {
 import {
   Accordion,
   AccordionItem,
-  AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
 import { RepossessionForm } from "@/components/repossession-form";
@@ -37,19 +35,16 @@ import {
   staggerContainer,
 } from "@/lib/animations";
 import SectionContainer from "@/components/SectionContainer";
-import useWatchDataAttribute from "@/hooks/useWatchDataAttribute";
+import { HoverableAccordionTrigger } from "@/components/HoverableAccordionTrigger";
 
-// Licensing Icons
-const licensingIcons = {
-  maineLicense: ShieldCheck,
-  nmlsRegistration: BadgeCheck,
-  uccCompliance: Gavel,
-  title9ACompliance: FileSearch,
-  fdpaCompliance: FileSearch,
-  consumerProtection: ShieldCheck,
+// Icon Mappings
+const whyChooseIcons = {
+  provenExperience: ShieldCheck,
+  zeroRiskPricing: BadgeCheck,
+  legalCompliance: FileSearch,
+  fastResults: Clock,
 } as const;
 
-// Services Icons
 const serviceIcons = {
   carRepossession: Truck,
   boatRecovery: Anchor,
@@ -59,12 +54,88 @@ const serviceIcons = {
   storageAuction: Landmark,
 } as const;
 
-const whyChooseIcons = {
-  provenExperience: ShieldCheck,
-  zeroRiskPricing: BadgeCheck,
-  legalCompliance: FileSearch,
-  fastResults: Clock,
+const licensingIcons = {
+  maineLicense: ShieldCheck,
+  nmlsRegistration: BadgeCheck,
+  uccCompliance: Gavel,
+  title9ACompliance: FileSearch,
+  fdpaCompliance: FileSearch,
+  consumerProtection: ShieldCheck,
 } as const;
+
+// Data Arrays
+const whyChooseRepoMaine: {
+  title: string;
+  description: string;
+  iconKey: keyof typeof whyChooseIcons;
+}[] = [
+  {
+    title: "Proven Experience",
+    iconKey: "provenExperience",
+    description:
+      "With 10+ years in asset recovery, title processing, and auto lending, we’ve honed the strategies it takes to recover vehicles fast, safely, and legally.",
+  },
+  {
+    title: "Zero-Risk Pricing",
+    iconKey: "zeroRiskPricing",
+    description:
+      "You only pay if we successfully recover the asset. No hidden fees and no upfront costs—get in touch for a fully transparent fee structure.",
+  },
+  {
+    title: "Legal & Compliance",
+    iconKey: "legalCompliance",
+    description:
+      "We stay up-to-date with Maine laws and handle repossessions in full compliance—protecting you from legal and regulatory pitfalls.",
+  },
+  {
+    title: "Fast Results",
+    iconKey: "fastResults",
+    description:
+      "Our streamlined process ensures vehicles are located, recovered, and secured quickly—minimizing your losses.",
+  },
+];
+
+const services: {
+  title: string;
+  description: string;
+  iconKey: keyof typeof serviceIcons;
+}[] = [
+  {
+    title: "Car Repossession",
+    iconKey: "carRepossession",
+    description:
+      "Fast and legally compliant vehicle recovery for lenders and financial institutions.",
+  },
+  {
+    title: "Boat & Marine Recovery",
+    iconKey: "boatRecovery",
+    description: "Secure retrieval of boats, yachts, and other marine vessels.",
+  },
+  {
+    title: "RV & Camper Repossession",
+    iconKey: "rvRepossession",
+    description:
+      "Efficient recovery of large recreational vehicles and campers.",
+  },
+  {
+    title: "Trailer & Equipment Recovery",
+    iconKey: "trailerRecovery",
+    description:
+      "Industrial and commercial asset recovery using specialized equipment.",
+  },
+  {
+    title: "Skip Tracing & Asset Location",
+    iconKey: "skipTracing",
+    description:
+      "Locate hidden or missing assets nationwide with advanced tracing tools.",
+  },
+  {
+    title: "Storage & Auction Services",
+    iconKey: "storageAuction",
+    description:
+      "Safe storage and legally conducted auctions to maximize asset value.",
+  },
+];
 
 const licensing: {
   title: string;
@@ -262,56 +333,6 @@ const faqs = [
   },
 ];
 
-const services: {
-  title: string;
-  description: string;
-  iconKey: keyof typeof serviceIcons;
-}[] = [
-  {
-    title: "Car Repossession",
-    iconKey: "carRepossession",
-    description:
-      "Fast and legally compliant vehicle recovery for lenders and financial institutions.",
-  },
-  {
-    title: "Boat & Marine Recovery",
-    iconKey: "boatRecovery",
-    description: "Secure retrieval of boats, yachts, and other marine vessels.",
-  },
-  {
-    title: "RV & Camper Repossession",
-    iconKey: "rvRepossession",
-    description:
-      "Efficient recovery of large recreational vehicles and campers.",
-  },
-  {
-    title: "Trailer & Equipment Recovery",
-    iconKey: "trailerRecovery",
-    description:
-      "Industrial and commercial asset recovery using specialized equipment.",
-  },
-  {
-    title: "Skip Tracing & Asset Location",
-    iconKey: "skipTracing",
-    description:
-      "Locate hidden or missing assets nationwide with advanced tracing tools.",
-  },
-  {
-    title: "Storage & Auction Services",
-    iconKey: "storageAuction",
-    description:
-      "Safe storage and legally conducted auctions to maximize asset value.",
-  },
-];
-
-const partnershipSolutions = [
-  "Fast asset recovery",
-  "Secure vehicle storage & 24-hour surveillance",
-  "Transparent reporting & compliance tracking",
-  "Real-time status updates via online portal",
-  "Nationwide skip tracing services",
-];
-
 const processSteps = [
   {
     title: "Request Submission",
@@ -335,74 +356,13 @@ const processSteps = [
   },
 ];
 
-const whyChooseRepoMaine: {
-  title: string;
-  description: string;
-  iconKey: keyof typeof whyChooseIcons;
-}[] = [
-  {
-    title: "Proven Experience",
-    iconKey: "provenExperience",
-    description:
-      "With 10+ years in asset recovery, title processing, and auto lending, we’ve honed the strategies it takes to recover vehicles fast, safely, and legally.",
-  },
-  {
-    title: "Zero-Risk Pricing",
-    iconKey: "zeroRiskPricing",
-    description:
-      "You only pay if we successfully recover the asset. No hidden fees and no upfront costs—get in touch for a fully transparent fee structure.",
-  },
-  {
-    title: "Legal & Compliance",
-    iconKey: "legalCompliance",
-    description:
-      "We stay up-to-date with Maine laws and handle repossessions in full compliance—protecting you from legal and regulatory pitfalls.",
-  },
-  {
-    title: "Fast Results",
-    iconKey: "fastResults",
-    description:
-      "Our streamlined process ensures vehicles are located, recovered, and secured quickly—minimizing your losses.",
-  },
+const partnershipSolutions = [
+  "Fast asset recovery",
+  "Secure vehicle storage & 24-hour surveillance",
+  "Transparent reporting & compliance tracking",
+  "Real-time status updates via online portal",
+  "Nationwide skip tracing services",
 ];
-
-interface HoverableAccordionTriggerProps
-  extends Omit<ComponentPropsWithoutRef<typeof AccordionTrigger>, "children"> {
-  text: string;
-}
-
-function HoverableAccordionTrigger({
-  text,
-  ...props
-}: HoverableAccordionTriggerProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const triggerRef = useRef<HTMLButtonElement>(null);
-  const dataState = useWatchDataAttribute(triggerRef, "data-state");
-  const isOpen = dataState === "open";
-
-  const shouldAnimate = !isOpen && isHovered;
-
-  return (
-    <AccordionTrigger
-      ref={triggerRef}
-      {...props}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className={`group text-left hover:no-underline relative ${props.className ?? ""}`}
-    >
-      <div className="flex items-center space-x-4">
-        <Info className="h-5 w-5 text-primary" />
-        <motion.h3
-          className="text-lg font-semibold"
-          animate={shouldAnimate ? { x: [0, 8, -4, 0] } : { x: 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-        >
-          {text}
-        </motion.h3>
-      </div>
-    </AccordionTrigger>
-  );
-}
 
 // ---------------------
 // MAIN HOME COMPONENT

@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="more small refactors">
+    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="efficiencies">
+      <change afterPath="$PROJECT_DIR$/src/components/HoverableAccordionTrigger.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/NavListItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/repossession-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/repossession-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/main-nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main-nav.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -204,7 +206,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739767307316</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="efficiencies">
+      <option name="closed" value="true" />
+      <created>1739769284064</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1739769284064</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,7 +243,8 @@
     <MESSAGE value="fix page export" />
     <MESSAGE value="small refactors" />
     <MESSAGE value="more small refactors" />
-    <option name="LAST_COMMIT_MESSAGE" value="more small refactors" />
+    <MESSAGE value="efficiencies" />
+    <option name="LAST_COMMIT_MESSAGE" value="efficiencies" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
