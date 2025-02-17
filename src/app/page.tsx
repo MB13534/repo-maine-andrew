@@ -81,73 +81,152 @@ const licensing = [
 const faqs = [
   {
     question: "Who is legally allowed to perform repossessions in Maine?",
-    answer:
-      "In Maine, only licensed repossession agencies registered with the **Maine Bureau of Consumer Credit Protection (BCCP)** can legally recover vehicles or assets. Agents must also comply with UCC Article 9 and Maine Title 9-A.",
+    answer: (
+      <>
+        In Maine, only licensed repossession agencies registered with the{" "}
+        <strong>Maine Bureau of Consumer Credit Protection (BCCP)</strong> can
+        legally recover vehicles or assets. Agents must also comply with UCC
+        Article 9 and Maine Title 9-A.
+      </>
+    ),
   },
   {
     question: "What are Maine's ‘Breach of Peace’ repossession laws?",
-    answer:
-      "Under **Maine Revised Statutes Title 9-A, Part 5**, a repossession **cannot** occur if it results in a 'breach of the peace.' This means: ",
+    answer: (
+      <>
+        Under <strong>Maine Revised Statutes Title 9-A, Part 5</strong>, a
+        repossession <strong>cannot</strong> occur if it results in a 'breach of
+        the peace.' This means:
+      </>
+    ),
     bullets: [
-      "Repossessors **cannot enter a locked garage or property without permission.**",
-      "They **cannot use force or threats** during repossession.",
-      "They **cannot impersonate law enforcement or government officials.**",
-      "If a consumer verbally objects at the scene, the repossession **must be stopped** immediately.",
+      <>
+        Repossessors{" "}
+        <strong>
+          cannot enter a locked garage or property without permission.
+        </strong>
+      </>,
+      <>
+        They <strong>cannot use force or threats</strong> during repossession.
+      </>,
+      <>
+        They{" "}
+        <strong>
+          cannot impersonate law enforcement or government officials.
+        </strong>
+      </>,
+      <>
+        If a consumer verbally objects at the scene, the repossession{" "}
+        <strong>must be stopped</strong> immediately.
+      </>,
     ],
   },
   {
     question: "What notifications are required after repossession?",
-    answer:
-      "Maine law requires lenders to send a **post-repossession notice** within **3 business days**. This must inform the borrower of: ",
+    answer: (
+      <>
+        Maine law requires lenders to send a{" "}
+        <strong>post-repossession notice</strong> within{" "}
+        <strong>3 business days</strong>. This must inform the borrower of:
+      </>
+    ),
     bullets: [
       "Where their vehicle or asset is being stored.",
       "How they can reclaim their property by paying outstanding debts.",
-      "Whether the asset will be **sold privately or at auction**.",
+      <>
+        Whether the asset will be <strong>sold privately or at auction</strong>.
+      </>,
     ],
   },
   {
     question: "Why is NMLS licensing important?",
-    answer:
-      "The **Nationwide Multistate Licensing System (NMLS)** ensures repossession agencies meet strict federal and state consumer protection laws. Holding an NMLS registration means we:",
+    answer: (
+      <>
+        The <strong>Nationwide Multistate Licensing System (NMLS)</strong>{" "}
+        ensures repossession agencies meet strict federal and state consumer
+        protection laws. Holding an NMLS registration means we:
+      </>
+    ),
     bullets: [
       "Maintain proper insurance coverage",
       "Pass regular background checks",
       "Complete required training",
-      "Follow **all** Maine and federal repossession laws",
+      <>
+        Follow <strong>all</strong> Maine and federal repossession laws
+      </>,
     ],
   },
   {
     question: "Are the Maine License # and NMLS # the same?",
-    answer:
-      "No. The **Maine Repossession License** (e.g., #PRS-04592) is issued by the **Maine Bureau of Consumer Credit Protection (BCCP)** and is required for operating in the state. The **NMLS # (e.g., #1730027)** is a federal registry ensuring compliance with consumer credit regulations.",
+    answer: (
+      <>
+        No. The <strong>Maine Repossession License</strong> (e.g., #PRS-04592)
+        is issued by the{" "}
+        <strong>Maine Bureau of Consumer Credit Protection (BCCP)</strong> and
+        is required for operating in the state. The{" "}
+        <strong>NMLS # (e.g., #1730027)</strong> is a federal registry ensuring
+        compliance with consumer credit regulations.
+      </>
+    ),
   },
   {
     question: "How many licensed repo companies operate in Maine?",
-    answer:
-      "As of 2024, only about **a dozen** fully licensed repossession agencies operate statewide. We are among the few that maintain **full compliance** with all state and federal laws.",
+    answer: (
+      <>
+        As of 2024, only about <strong>a dozen</strong> fully licensed
+        repossession agencies operate statewide. We are among the few that
+        maintain <strong>full compliance</strong> with all state and federal
+        laws.
+      </>
+    ),
   },
   {
     question: "What risks come with using unlicensed operators?",
     answer: "Using unlicensed repossession agents can lead to:",
     bullets: [
-      "**Invalidated security interests**, making repossession illegal",
-      "**Civil liability for wrongful repossession**, leading to lawsuits",
-      "**FDCPA violations**, with fines up to $1,000 per violation",
-      "**Potential criminal charges** for trespassing or unauthorized vehicle recovery",
+      <>
+        <strong>Invalidated security interests</strong>, making repossession
+        illegal
+      </>,
+      <>
+        <strong>Civil liability for wrongful repossession</strong>, leading to
+        lawsuits
+      </>,
+      <>
+        <strong>FDCPA violations</strong>, with fines up to $1,000 per violation
+      </>,
+      <>
+        <strong>Potential criminal charges</strong> for trespassing or
+        unauthorized vehicle recovery
+      </>,
     ],
   },
   {
     question: "What happens after a vehicle is repossessed in Maine?",
-    answer:
-      "After repossession, the lender **must send a post-repossession notice** explaining the next steps. The borrower has a **right to redeem the vehicle** before it is sold at auction by paying off the outstanding loan balance plus any fees.",
+    answer: (
+      <>
+        After repossession, the lender{" "}
+        <strong>must send a post-repossession notice</strong> explaining the
+        next steps. The borrower has a{" "}
+        <strong>right to redeem the vehicle</strong> before it is sold at
+        auction by paying off the outstanding loan balance plus any fees.
+      </>
+    ),
   },
   {
     question: "How can I verify the credentials of a repossession company?",
-    answer:
-      "You can verify a repossession agency’s licensing credentials through:",
+    answer: (
+      <>You can verify a repossession agency’s licensing credentials through:</>
+    ),
     bullets: [
-      "**The Maine Bureau of Consumer Credit Protection** – Check for an active state license.",
-      "**The NMLS Consumer Access website** – Search for the company’s NMLS number.",
+      <>
+        <strong>The Maine Bureau of Consumer Credit Protection</strong> – Check
+        for an active state license.
+      </>,
+      <>
+        <strong>The NMLS Consumer Access website</strong> – Search for the
+        company’s NMLS number.
+      </>,
     ],
   },
 ];
@@ -218,6 +297,33 @@ const processSteps = [
     title: "Transfer & Documentation",
     description:
       "Securely transfer the asset and provide detailed documentation.",
+  },
+];
+
+const whyChooseRepoMaine = [
+  {
+    title: "Proven Experience",
+    icon: <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />,
+    description:
+      "With 10+ years in asset recovery, title processing, and auto lending, we’ve honed the strategies it takes to recover vehicles fast, safely, and legally.",
+  },
+  {
+    title: "Zero-Risk Pricing",
+    icon: <BadgeCheck className="mx-auto h-12 w-12 text-primary mb-4" />,
+    description:
+      "You only pay if we successfully recover the asset. No hidden fees and no upfront costs—get in touch for a fully transparent fee structure.",
+  },
+  {
+    title: "Legal & Compliance",
+    icon: <FileSearch className="mx-auto h-12 w-12 text-primary mb-4" />,
+    description:
+      "We stay up-to-date with Maine laws and handle repossessions in full compliance—protecting you from legal and regulatory pitfalls.",
+  },
+  {
+    title: "Fast Results",
+    icon: <Clock className="mx-auto h-12 w-12 text-primary mb-4" />,
+    description:
+      "Our streamlined process ensures vehicles are located, recovered, and secured quickly—minimizing your losses.",
   },
 ];
 
@@ -311,8 +417,8 @@ export default function Home() {
             in Portland, Maine
           </h1>
           <p className="mt-6 text-xl sm:text-2xl text-primary-foreground max-w-3xl mx-auto">
-            Fast, **Risk-Free** Repossession Solutions for Lenders &amp; Auto
-            Finance Providers
+            Fast, <strong>Risk-Free</strong> Repossession Solutions for Lenders
+            &amp; Auto Finance Providers
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <motion.div whileHover={{ scale: 1.05 }}>
@@ -371,11 +477,13 @@ export default function Home() {
               smoothly and safely.
             </p>
             <p className="text-lg text-muted-foreground">
-              Our mission is simple: deliver **fast, cost-effective, and
-              risk-free repossession solutions** to financial institutions,
-              dealers, and private lenders. We handle everything from skip
-              tracing to secure storage—so you can focus on your core business
-              while we handle recoveries.
+              Our mission is simple: deliver{" "}
+              <strong>
+                fast, cost-effective, and risk-free repossession solutions
+              </strong>{" "}
+              to financial institutions, dealers, and private lenders. We handle
+              everything from skip tracing to secure storage—so you can focus on
+              your core business while we handle recoveries.
             </p>
             <div className="grid grid-cols-2 gap-4 mt-6">
               <div className="p-4 bg-muted rounded-lg text-center">
@@ -403,7 +511,7 @@ export default function Home() {
         </SectionContainer>
       </motion.section>
 
-      {/* RISK-FREE / "WHY CHOOSE US" SECTION */}
+      {/* WHY CHOOSE REPOMAINE SECTION */}
       <motion.section
         className="py-24 bg-muted text-center text-foreground"
         id="why-repomaine"
@@ -418,68 +526,26 @@ export default function Home() {
             description="Discover how we minimize your risk and maximize asset recoveries."
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 px-3 sm:px-4 md:px-6 lg:px-8">
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <ShieldCheck className="mx-auto h-12 w-12 text-primary mb-4" />
-                <CardTitle className="text-xl font-bold">
-                  Proven Experience
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  With 10+ years in asset recovery, title processing, and auto
-                  lending, we&apos;ve honed the strategies it takes to recover
-                  vehicles fast, safely, and legally.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <BadgeCheck className="mx-auto h-12 w-12 text-primary mb-4" />
-                <CardTitle className="text-xl font-bold">
-                  Zero-Risk Pricing
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  You only pay if we successfully recover the asset. **No hidden
-                  fees** and **no upfront costs**—get in touch for a fully
-                  transparent fee structure.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <FileSearch className="mx-auto h-12 w-12 text-primary mb-4" />
-                <CardTitle className="text-xl font-bold">
-                  Legal &amp; Compliance
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  We stay up-to-date with Maine laws and handle repossessions in
-                  full compliance—protecting you from legal and regulatory
-                  pitfalls.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Clock className="mx-auto h-12 w-12 text-primary mb-4" />
-                <CardTitle className="text-xl font-bold">
-                  Fast Results
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Our streamlined process ensures vehicles are located,
-                  recovered, and secured quickly—minimizing your losses.
-                </p>
-              </CardContent>
-            </Card>
+            {whyChooseRepoMaine.map((item) => (
+              <motion.div
+                key={item.title}
+                variants={fadeInUp}
+                whileHover={{ scale: 1.05 }}
+                className="flex"
+              >
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    {item.icon}
+                    <CardTitle className="text-xl font-bold">
+                      {item.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">{item.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </SectionContainer>
       </motion.section>
@@ -524,13 +590,11 @@ export default function Home() {
             ))}
           </motion.div>
           <p className="mt-8 text-center text-muted-foreground max-w-2xl mx-auto">
-            We offer a{" "}
-            <strong className="text-foreground">
-              risk-free, success-based model
-            </strong>
-            . If we do not recover your asset, you pay nothing.
+            We offer a <strong>risk-free, success-based model</strong>. If we do
+            not recover your asset, you pay nothing.
             <br />
-            Reach out for a **fully transparent** fee structure—no hidden costs.
+            Reach out for a <strong>fully transparent</strong> fee structure—no
+            hidden costs.
           </p>
         </SectionContainer>
       </motion.section>
@@ -557,7 +621,11 @@ export default function Home() {
             animate={isServicesInView ? "visible" : "hidden"}
           >
             {services.map((service, index) => (
-              <motion.div key={index} variants={fadeInUp}>
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                whileHover={{ scale: 1.05 }}
+              >
                 <Card className="hover:shadow-lg transition-shadow h-full">
                   <CardHeader>
                     <div className="mb-4 text-primary">{service.icon}</div>
@@ -660,6 +728,7 @@ export default function Home() {
               <motion.div
                 key={item.title}
                 variants={slideInRight}
+                whileHover={{ scale: 1.05 }}
                 className="text-center p-6 border rounded-lg border-border hover:shadow-lg transition-shadow"
               >
                 {item.icon}

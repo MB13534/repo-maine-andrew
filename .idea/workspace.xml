@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="fix page export">
+    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="small refactors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/contact/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/contact/route.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/repossession-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/repossession-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/nav.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/nav.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,11 +184,30 @@
       <option name="project" value="LOCAL" />
       <updated>1739762761764</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="small refactors">
+      <option name="closed" value="true" />
+      <created>1739765773282</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1739765773282</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="refactor(ServiceAreaMap): adds logic to change colors based on theme" />
@@ -204,7 +219,8 @@
     <MESSAGE value="faq section&#10;more color themes&#10;useWatchDataAttribute" />
     <MESSAGE value="FloatingCTA&#10;adds some real content&#10;reorders sections&#10;adds nav grouping&#10;adds nodemailer&#10;connects real form and adds email feedback" />
     <MESSAGE value="fix page export" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix page export" />
+    <MESSAGE value="small refactors" />
+    <option name="LAST_COMMIT_MESSAGE" value="small refactors" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
