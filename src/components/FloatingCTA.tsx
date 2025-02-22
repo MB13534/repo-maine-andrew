@@ -25,7 +25,7 @@ export const FloatingCTA = () => {
   return (
     <motion.div
       initial={{ bottom: 24 }}
-      animate={{ bottom: isAtBottom ? 80 : 24 }}
+      animate={{ bottom: isAtBottom ? 150 : 24 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className="hidden md:block fixed right-6 z-50"
     >
@@ -60,11 +60,7 @@ export const FloatingCTA = () => {
             className="rounded-full p-3"
             asChild
           >
-            <a
-              href="tel:1234567890"
-              aria-label="Call Us"
-              title="Emergency Services"
-            >
+            <a href="tel:2072227202" aria-label="Call Us" title="Call Us Now">
               <Phone className="h-5 w-5" />
             </a>
           </Button>

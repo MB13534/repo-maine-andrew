@@ -43,11 +43,11 @@ export const navSections: NavSection[] = [
         href: "#service-areas",
         description: "Check which regions we cover in Maine.",
       },
-      {
-        title: "Partnership Services",
-        href: "#partnership-services",
-        description: "Learn about partnerships for lenders and institutions.",
-      },
+      // {
+      //   title: "Partnership Services",
+      //   href: "#partnership-services",
+      //   description: "Learn about partnerships for lenders and institutions.",
+      // },
     ],
   },
   {
@@ -74,11 +74,11 @@ export const navSections: NavSection[] = [
         href: "#contact",
         description: "Get in touch via our form or phone number.",
       },
-      {
-        title: "Emergency Services",
-        href: "#emergency",
-        description: "24/7 immediate support for urgent repossessions.",
-      },
+      // {
+      //   title: "Emergency Services",
+      //   href: "#emergency",
+      //   description: "24/7 immediate support for urgent repossessions.",
+      // },
     ],
   },
 ];

@@ -42,3 +42,15 @@ export const staggerContainer = {
     transition: { staggerChildren: 0.15, delayChildren: 0.2 },
   },
 };
+
+export const pixelateIn = {
+  hidden: {
+    opacity: 0,
+    filter: "blur(10px) contrast(200%)",
+  },
+  visible: {
+    opacity: 1,
+    filter: "blur(0px) contrast(100%)",
+    transition: { duration: 1.2, ease: "easeOut" },
+  },
+};

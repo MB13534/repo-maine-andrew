@@ -27,9 +27,16 @@ const baseSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  inquiryType: z.enum(["repossession", "general", "partnership"], {
-    errorMap: () => ({ message: "Please select an inquiry type" }),
-  }),
+  inquiryType: z.enum(
+    [
+      "repossession",
+      "general",
+      // "partnership"
+    ],
+    {
+      errorMap: () => ({ message: "Please select an inquiry type" }),
+    },
+  ),
   // Optional by default:
   assetType: z.string().optional(),
   assetLocation: z.string().optional(),
@@ -214,9 +221,9 @@ export function EmailForm() {
                         Repossession Request
                       </SelectItem>
                       <SelectItem value="general">General Inquiry</SelectItem>
-                      <SelectItem value="partnership">
-                        Partnership Inquiry
-                      </SelectItem>
+                      {/*<SelectItem value="partnership">*/}
+                      {/*  Partnership Inquiry*/}
+                      {/*</SelectItem>*/}
                     </SelectContent>
                   </Select>
                 </FormControl>

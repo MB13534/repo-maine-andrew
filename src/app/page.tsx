@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -29,6 +29,7 @@ import ServiceAreaSection from "@/components/sections/ServiceAreaSection";
 import SectionHeader from "@/components/SectionHeader";
 import {
   fadeInUp,
+  pixelateIn,
   scaleIn,
   slideInLeft,
   slideInRight,
@@ -36,6 +37,15 @@ import {
 } from "@/lib/animations";
 import SectionContainer from "@/components/SectionContainer";
 import { HoverableAccordionTrigger } from "@/components/HoverableAccordionTrigger";
+
+// Image URLs
+const heroImages = [
+  "/hero-1.png",
+  "/hero-2.png",
+  "/hero-3.png",
+  "/hero-4.png",
+  "/hero-5.png",
+];
 
 // Icon Mappings
 const whyChooseIcons = {
@@ -146,13 +156,13 @@ const licensing: {
     title: "Maine Repossession License",
     iconKey: "maineLicense",
     detail:
-      "License #PRS-04592 (Issued by Maine Bureau of Consumer Credit Protection) – required for all repossession companies operating within Maine.",
+      "Licensed by the Maine Bureau Of Consumer Credit Protection as required for all repossession companies operating in Maine.",
   },
   {
     title: "NMLS Registration",
     iconKey: "nmlsRegistration",
     detail:
-      "NMLS #1730027 (Nationwide Multistate Licensing System) – ensures federal compliance with consumer credit and debt collection laws.",
+      "NMLS #2688329 (Nationwide Multistate Licensing System) – ensures federal compliance with consumer credit and debt collection laws.",
   },
   {
     title: "UCC Article 9 Compliance",
@@ -233,10 +243,9 @@ const faqs = [
       </>
     ),
     bullets: [
-      "Where their vehicle or asset is being stored.",
       "How they can reclaim their property by paying outstanding debts.",
       <>
-        Whether the asset will be <strong>sold privately or at auction</strong>.
+        <strong>When </strong> the asset will be sold.
       </>,
     ],
   },
@@ -257,30 +266,6 @@ const faqs = [
         Follow <strong>all</strong> Maine and federal repossession laws
       </>,
     ],
-  },
-  {
-    question: "Are the Maine License # and NMLS # the same?",
-    answer: (
-      <>
-        No. The <strong>Maine Repossession License</strong> (e.g., #PRS-04592)
-        is issued by the{" "}
-        <strong>Maine Bureau of Consumer Credit Protection (BCCP)</strong> and
-        is required for operating in the state. The{" "}
-        <strong>NMLS # (e.g., #1730027)</strong> is a federal registry ensuring
-        compliance with consumer credit regulations.
-      </>
-    ),
-  },
-  {
-    question: "How many licensed repo companies operate in Maine?",
-    answer: (
-      <>
-        As of 2024, only about <strong>a dozen</strong> fully licensed
-        repossession agencies operate statewide. We are among the few that
-        maintain <strong>full compliance</strong> with all state and federal
-        laws.
-      </>
-    ),
   },
   {
     question: "What risks come with using unlicensed operators?",
@@ -356,13 +341,13 @@ const processSteps = [
   },
 ];
 
-const partnershipSolutions = [
-  "Fast asset recovery",
-  "Secure vehicle storage & 24-hour surveillance",
-  "Transparent reporting & compliance tracking",
-  "Real-time status updates via online portal",
-  "Nationwide skip tracing services",
-];
+// const partnershipSolutions = [
+//   "Fast asset recovery",
+//   "Secure vehicle storage & 24-hour surveillance",
+//   "Transparent reporting & compliance tracking",
+//   "Real-time status updates via online portal",
+//   "Nationwide skip tracing services",
+// ];
 
 // ---------------------
 // MAIN HOME COMPONENT
@@ -373,6 +358,8 @@ export default function Home() {
   const licensingRef = useRef(null);
   const processRef = useRef(null);
 
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   const isServicesInView = useInView(servicesRef, {
     once: true,
     margin: "-50px",
@@ -382,48 +369,77 @@ export default function Home() {
     margin: "-50px",
   });
 
+  // Rotate hero images every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1,
+      );
+    }, 5000); // 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="flex flex-col overflow-hidden">
       {/* HERO SECTION */}
       <motion.section
         className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center bg-muted text-foreground"
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeInUp}
+        animate="visible"
+        variants={pixelateIn}
       >
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--primary)/0.9)] to-[hsl(var(--background)/0.6)] dark:from-[hsl(var(--primary)/0.95)] dark:to-[hsl(var(--background)/0.8)]" />
-          <Image
-            src="/hero-bg.jpg"
-            alt="Professional Repossession Services"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
+        {/* Background Image and Gradient Overlay */}
+        <AnimatePresence>
+          {heroImages.map((image, index) => (
+            <motion.div
+              key={image}
+              initial={{ opacity: index === currentImageIndex ? 0 : 0 }}
+              animate={{ opacity: index === currentImageIndex ? 1 : 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="absolute inset-0"
+              style={{ zIndex: index === currentImageIndex ? 2 : 1 }}
+            >
+              <Image
+                src={image}
+                alt={`Hero Image ${index + 1}`}
+                fill
+                className="object-cover"
+                priority={index === 0}
+              />
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background)/0.6)] to-[hsl(var(--background)/0.9)] dark:from-[hsl(var(--background)/0.4)] dark:to-[hsl(var(--background)/0.8)]" />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+
+        {/* Content Wrapper with Subtle Overlay */}
         <div className="relative z-10 max-w-6xl w-full px-8 text-center">
           <Badge
             variant="outline"
-            className="mb-6 p-2 bg-primary/40 text-primary-foreground border-primary"
+            className="mb-6 p-2 bg-primary/40 text-primary-foreground border-primary backdrop-blur-sm"
           >
             <ShieldCheck className="mr-2 h-4 w-4" />
             Your Trusted Repossession Partner
           </Badge>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
-            Asset Recovery Services <br className="hidden lg:block" />
-            in Portland, Maine
+
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight text-[hsl(var(--foreground))] drop-shadow-md">
+            Recovery Solutions <br className="hidden lg:block" />
+            for Southern Maine
           </h1>
-          <p className="mt-6 text-xl sm:text-2xl text-primary-foreground max-w-3xl mx-auto">
+
+          <p className="mt-6 text-xl sm:text-2xl text-[hsl(var(--foreground)/0.9)] max-w-3xl mx-auto drop-shadow-sm">
             Fast, <strong>Risk-Free</strong> Repossession Solutions for Lenders
             &amp; Auto Finance Providers
           </p>
+
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <motion.div whileHover={{ scale: 1.05 }}>
               <Link href={"#contact"}>
                 <Button
                   size="lg"
-                  className="bg-primary hover:bg-primary/90 text-lg px-8 py-6"
+                  className="bg-primary hover:bg-primary/90 text-lg px-8 py-6 shadow-lg"
                 >
                   Request Repossession Now
                 </Button>
@@ -433,7 +449,7 @@ export default function Home() {
               <Button
                 variant="secondary"
                 size="lg"
-                className="text-lg px-8 py-6"
+                className="text-lg px-8 py-6 shadow-lg"
               >
                 Learn More
               </Button>
@@ -445,7 +461,7 @@ export default function Home() {
       {/* ABOUT US SECTION */}
       <motion.section
         id="about"
-        className="py-24 bg-background text-foreground"
+        className="py-24 bg-muted"
         ref={aboutRef}
         initial="hidden"
         whileInView="visible"
@@ -484,26 +500,28 @@ export default function Home() {
               your core business while we handle recoveries.
             </p>
             <div className="grid grid-cols-2 gap-4 mt-6">
-              <div className="p-4 bg-muted rounded-lg text-center">
+              <div className="p-4 bg-background rounded-lg text-center">
                 <div className="text-3xl font-bold text-primary">10+ Yrs</div>
                 <div className="text-sm text-muted-foreground">
                   Industry Experience
                 </div>
               </div>
-              <div className="p-4 bg-muted rounded-lg text-center">
-                <div className="text-3xl font-bold text-primary">24/7</div>
+              <div className="p-4 bg-background rounded-lg text-center">
+                <div className="text-3xl font-bold text-primary">Zero-Risk</div>
                 <div className="text-sm text-muted-foreground">
-                  Emergency Service
+                  Pricing Model
                 </div>
               </div>
             </div>
           </div>
-          <div className="relative aspect-video bg-muted rounded-xl overflow-hidden">
+          <div className="relative aspect-video rounded-xl overflow-hidden">
             <Image
-              src="/about-us.jpg"
-              alt="Our Team"
+              src="/truck.png"
+              alt="Repossession Truck Driving"
+              className="object-cover object-bottom"
               fill
-              className="object-cover"
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
         </SectionContainer>
@@ -511,7 +529,7 @@ export default function Home() {
 
       {/* WHY CHOOSE REPOMAINE SECTION */}
       <motion.section
-        className="py-24 bg-muted text-center text-foreground"
+        className="py-24 bg-background text-center"
         id="why-repomaine"
         initial="hidden"
         whileInView="visible"
@@ -556,7 +574,7 @@ export default function Home() {
       {/* PROCESS SECTION  */}
       <motion.section
         id="process"
-        className="py-24 bg-background text-foreground"
+        className="py-24 bg-muted"
         ref={processRef}
         initial="hidden"
         animate="visible"
@@ -567,45 +585,47 @@ export default function Home() {
             title="Our Simple 4-Step Process"
             description="Our repossession process is straightforward and efficient."
           />
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 px-3 sm:px-4 md:px-6 lg:px-8 mt-10"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-          >
-            {processSteps.map((step, index) => (
-              <motion.div
-                key={step.title}
-                variants={fadeInUp}
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-6 border-2 rounded-lg border-primary hover:shadow-lg transition-shadow"
-              >
-                <div className="w-16 h-16 bg-primary rounded-full mx-auto mb-4 flex items-center justify-center text-primary-foreground text-xl font-bold">
-                  {index + 1}
-                </div>
-                <h3 className="text-lg font-semibold mb-2 text-foreground">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {step.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-          <p className="mt-8 text-center text-muted-foreground max-w-2xl mx-auto">
-            We offer a <strong>risk-free, success-based model</strong>. If we do
-            not recover your asset, you pay nothing.
-            <br />
-            Reach out for a <strong>fully transparent</strong> fee structure—no
-            hidden costs.
-          </p>
+          <div className="grid md:grid-cols-2 gap-8 mt-10">
+            <div className="relative rounded-lg overflow-hidden shadow-md">
+              <Image
+                src="/boat.png"
+                alt="Docked Boat in Marina"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+            <motion.div
+              className="grid grid-cols-1 gap-6"
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+            >
+              {processSteps.map((step, index) => (
+                <motion.div
+                  key={step.title}
+                  variants={fadeInUp}
+                  whileHover={{ scale: 1.05 }}
+                  className="flex bg-card p-4 rounded-lg shadow-sm"
+                >
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-lg font-bold mr-4 flex-shrink-0">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold">{step.title}</h3>
+                    <p className="text-muted-foreground">{step.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </SectionContainer>
       </motion.section>
 
       {/* SERVICES SECTION */}
       <motion.section
         id="services"
-        className="py-24 bg-muted text-foreground"
+        className="py-24 bg-background"
         ref={servicesRef}
         initial="hidden"
         animate={isServicesInView ? "visible" : "hidden"}
@@ -617,44 +637,51 @@ export default function Home() {
               description="Comprehensive asset recovery solutions tailored for financial institutions and lenders."
             />
           </motion.div>
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 px-3 sm:px-4 md:px-6 lg:px-8 mt-10"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={isServicesInView ? "visible" : "hidden"}
-          >
-            {services.map((service, index) => {
-              const IconComponent = serviceIcons[service.iconKey];
-              return (
-                <motion.div
-                  key={index}
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <Card className="hover:shadow-lg transition-shadow h-full">
-                    <CardHeader>
-                      <IconComponent className="h-8 w-8 text-primary mb-4" />
-                      <CardTitle className="text-xl font-bold">
-                        {service.title}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
+
+          <div className="grid md:grid-cols-2 gap-8 mt-10">
+            <motion.div
+              className="grid grid-cols-1 gap-6"
+              variants={staggerContainer}
+              initial="hidden"
+              animate={isServicesInView ? "visible" : "hidden"}
+            >
+              {services.map((service, index) => {
+                const IconComponent = serviceIcons[service.iconKey];
+                return (
+                  <motion.div
+                    key={index}
+                    variants={fadeInUp}
+                    whileHover={{ scale: 1.05 }}
+                    className="flex bg-muted p-4 rounded-lg shadow-sm"
+                  >
+                    <IconComponent className="h-8 w-8 text-primary mr-4 flex-shrink-0" />
+                    <div>
+                      <h3 className="text-xl font-bold">{service.title}</h3>
                       <p className="text-muted-foreground">
                         {service.description}
                       </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+            <div className="relative rounded-lg overflow-hidden shadow-md">
+              <Image
+                src="/trees.png"
+                alt="Trees in Maine"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
         </SectionContainer>
       </motion.section>
 
       {/* SERVICE AREA MAP  */}
       <motion.section
         id="service-areas"
-        className="py-24 bg-background"
+        className="py-24 bg-muted text-center"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -664,38 +691,38 @@ export default function Home() {
       </motion.section>
 
       {/* PARTNERSHIPS SECTION  */}
-      <motion.section
-        id="partnership-services"
-        className="py-24 bg-muted text-center text-foreground"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={slideInRight}
-      >
-        <SectionContainer>
-          <SectionHeader
-            title="Partnerships & Financial Institution Services"
-            description="We’ve built long-term relationships with lenders, credit unions, and other institutions. Our specialized solutions include:"
-          />
-          <ul className="list-disc list-inside mx-auto max-w-xl text-muted-foreground space-y-2">
-            {partnershipSolutions.map((solution) => (
-              <li key={solution}>{solution}</li>
-            ))}
-          </ul>
-          <div className="mt-8">
-            <Link href={"#contact"}>
-              <Button className="bg-primary hover:bg-primary/80 px-6 py-3 text-lg text-primary-foreground transition">
-                Partner With Us Today
-              </Button>
-            </Link>
-          </div>
-        </SectionContainer>
-      </motion.section>
+      {/*<motion.section*/}
+      {/*  id="partnership-services"*/}
+      {/*  className="py-24 bg-muted text-center"*/}
+      {/*  initial="hidden"*/}
+      {/*  whileInView="visible"*/}
+      {/*  viewport={{ once: true }}*/}
+      {/*  variants={slideInRight}*/}
+      {/*>*/}
+      {/*  <SectionContainer>*/}
+      {/*    <SectionHeader*/}
+      {/*      title="Partnerships & Financial Institution Services"*/}
+      {/*      description="We’ve built long-term relationships with lenders, credit unions, and other institutions. Our specialized solutions include:"*/}
+      {/*    />*/}
+      {/*    <ul className="list-disc list-inside mx-auto max-w-xl text-muted-foreground space-y-2">*/}
+      {/*      {partnershipSolutions.map((solution) => (*/}
+      {/*        <li key={solution}>{solution}</li>*/}
+      {/*      ))}*/}
+      {/*    </ul>*/}
+      {/*    <div className="mt-8">*/}
+      {/*      <Link href={"#contact"}>*/}
+      {/*        <Button className="bg-primary hover:bg-primary/80 px-6 py-3 text-lg text-primary-foreground transition">*/}
+      {/*          Partner With Us Today*/}
+      {/*        </Button>*/}
+      {/*      </Link>*/}
+      {/*    </div>*/}
+      {/*  </SectionContainer>*/}
+      {/*</motion.section>*/}
 
       {/* LICENSING & COMPLIANCE SECTION */}
       <section
         id="licensing"
-        className="py-24 bg-background text-foreground text-center"
+        className="py-24 bg-background text-center"
         ref={licensingRef}
       >
         <SectionContainer>
@@ -710,7 +737,7 @@ export default function Home() {
               every repossession follows proper legal procedures."
             />
             <Link
-              href="https://nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/1730027"
+              href="https://nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/2688329"
               className="ml-2 underline hover:text-primary"
               target="_blank"
               rel="noopener noreferrer"
@@ -720,7 +747,8 @@ export default function Home() {
                 className="mb-6 md:mb-12 text-lg py-2 px-4 bg-primary text-primary-foreground cursor-pointer transition-transform transform hover:scale-105"
               >
                 <ShieldCheck className="mr-2 h-6 w-6" />
-                Official NMLS #1730027 - Verify our license
+                Official NMLS #2688329 for A.C. ENTERPRISES LLC - Verify our
+                license
               </Badge>
             </Link>
           </motion.div>
@@ -730,19 +758,34 @@ export default function Home() {
             animate={isLicensingInView ? "visible" : "hidden"}
             variants={staggerContainer}
           >
-            {licensing.map((item) => {
+            {licensing.map((item, index) => {
               const IconComponent = licensingIcons[item.iconKey];
+
               return (
-                <motion.div
-                  key={item.title}
-                  variants={slideInRight}
-                  whileHover={{ scale: 1.05 }}
-                  className="text-center p-6 border rounded-lg border-border hover:shadow-lg transition-shadow"
-                >
-                  <IconComponent className="mx-auto h-12 w-12 text-primary mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground">{item.detail}</p>
-                </motion.div>
+                <Fragment key={item.title}>
+                  <motion.div
+                    variants={slideInRight}
+                    whileHover={{ scale: 1.05 }}
+                    className="text-center p-6 border rounded-lg border-border hover:shadow-lg transition-shadow"
+                  >
+                    <IconComponent className="mx-auto h-12 w-12 text-primary mb-4" />
+                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                    <p className="text-muted-foreground">{item.detail}</p>
+                  </motion.div>
+                  <motion.div
+                    variants={slideInRight}
+                    whileHover={{ scale: 1.05 }}
+                    className="relative text-center p-1 border rounded-lg border-border hover:shadow-lg transition-shadow"
+                  >
+                    <Image
+                      src={`/licensing-${index + 1}.png`}
+                      alt={`Licensing Image ${index + 1}`}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="rounded-lg shadow-lg object-cover"
+                    />
+                  </motion.div>
+                </Fragment>
               );
             })}
           </motion.div>
@@ -751,7 +794,7 @@ export default function Home() {
 
       <motion.section
         id="licensing-faq"
-        className="py-24 bg-muted text-center text-foreground"
+        className="py-24 bg-muted text-center"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -787,7 +830,7 @@ export default function Home() {
 
           <div className="mt-12 text-center">
             <Link
-              href="https://nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/1730027"
+              href="https://nmlsconsumeraccess.org/EntityDetails.aspx/INDIVIDUAL/2688329"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -798,7 +841,7 @@ export default function Home() {
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
               All recoveries conducted under Maine PRS License #04592 and NMLS
-              #1730027
+              #2688329
             </p>
           </div>
         </SectionContainer>
@@ -807,7 +850,7 @@ export default function Home() {
       {/* CONTACT SECTION */}
       <motion.section
         id="contact"
-        className="py-24 bg-background text-foreground"
+        className="py-24 bg-background"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -827,35 +870,35 @@ export default function Home() {
       </motion.section>
 
       {/* EMERGENCY SECTION  */}
-      <motion.section
-        id="emergency"
-        className="py-24 bg-muted text-foreground text-center px-3 sm:px-4 md:px-6 lg:px-8"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={slideInRight}
-      >
-        <SectionContainer>
-          <SectionHeader
-            title="Emergency & 24-Hour Repossession Services"
-            description="Need immediate assistance? We provide 24/7 emergency repossession services."
-          />
-          <Link href="tel:1234567890">
-            <Button
-              variant="destructive"
-              size="lg"
-              className="text-lg font-semibold"
-            >
-              <Phone className="h-5 w-5" />
-              Call Us Now (24/7)
-            </Button>
-          </Link>
-        </SectionContainer>
-      </motion.section>
+      {/*<motion.section*/}
+      {/*  id="emergency"*/}
+      {/*  className="py-24 bg-muted text-center px-3 sm:px-4 md:px-6 lg:px-8"*/}
+      {/*  initial="hidden"*/}
+      {/*  whileInView="visible"*/}
+      {/*  viewport={{ once: true }}*/}
+      {/*  variants={slideInRight}*/}
+      {/*>*/}
+      {/*  <SectionContainer>*/}
+      {/*    <SectionHeader*/}
+      {/*      title="Emergency & 24-Hour Repossession Services"*/}
+      {/*      description="Need immediate assistance? We provide 24/7 emergency repossession services."*/}
+      {/*    />*/}
+      {/*    <Link href="tel:2072227202">*/}
+      {/*      <Button*/}
+      {/*        variant="destructive"*/}
+      {/*        size="lg"*/}
+      {/*        className="text-lg font-semibold"*/}
+      {/*      >*/}
+      {/*        <Phone className="h-5 w-5" />*/}
+      {/*        Call Us Now (24/7)*/}
+      {/*      </Button>*/}
+      {/*    </Link>*/}
+      {/*  </SectionContainer>*/}
+      {/*</motion.section>*/}
 
       {/* BOTTOM CTA SECTION  */}
       <motion.section
-        className="py-10 bg-background text-foreground text-center"
+        className="py-10 bg-muted text-foreground text-center"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -870,16 +913,19 @@ export default function Home() {
             Reach out now to learn more about our process and how we can assist
             you.
           </p>
-          <Link href="tel:1234567890">
+          <Link href="tel:2072227202">
             <Button
               variant="secondary"
               size="lg"
-              className="text-lg font-semibold"
+              className="text-lg font-semibold border border-primary text-primary hover:bg-primary hover:text-primary-foreground shadow-md"
             >
-              <Phone className="h-5 w-5" />
+              <Phone className="h-5 w-5 mr-2" />
               Speak With an Expert
             </Button>
           </Link>
+          <p className="mt-2 text-lg font-semibold text-primary">
+            (207)-222-7202
+          </p>
         </div>
       </motion.section>
     </div>

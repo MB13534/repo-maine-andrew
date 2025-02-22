@@ -30,7 +30,7 @@ export function ThemeProvider({
 
     // Choose the correct color set
     const colors: ThemeColors =
-      resolvedTheme === "dark" ? themeConfig.dark : themeConfig.light;
+      resolvedTheme === "DARK" ? themeConfig.dark : themeConfig.light;
 
     // Update CSS variables
     Object.entries(colors).forEach(([key, value]) => {
@@ -41,11 +41,11 @@ export function ThemeProvider({
     // Set data-theme attribute (if needed elsewhere)
     document.documentElement.setAttribute("data-theme", theme);
 
-    // Toggle the "dark" class for Tailwind
-    if (resolvedTheme === "dark") {
-      document.documentElement.classList.add("dark");
+    // Toggle the "DARK" class for Tailwind
+    if (resolvedTheme === "DARK") {
+      document.documentElement.classList.add("DARK");
     } else {
-      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove("DARK");
     }
   }, [theme, resolvedTheme]);
 

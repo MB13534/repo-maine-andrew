@@ -18,7 +18,7 @@ export default function ServiceAreaSection() {
         description={
           <>
             We proudly serve <strong>Portland, Maine</strong> and the following
-            communities in the region:
+            primary communities in Southern Maine:
           </>
         }
       />
@@ -35,9 +35,14 @@ export default function ServiceAreaSection() {
           </Badge>
         ))}
       </div>
+
+      {/* Service Area Map */}
       <ServiceAreaMap hoveredTown={hoveredTown} />
-      <Separator />
-      <div className="bg-muted p-6 rounded-lg mt-8">
+
+      <Separator className="my-8" />
+
+      {/* Additional Service Areas */}
+      <div className="bg-background p-6 rounded-lg">
         <h3 className="text-lg font-semibold mb-4 text-foreground">
           Additional Service Areas
         </h3>
@@ -50,6 +55,13 @@ export default function ServiceAreaSection() {
           ))}
         </div>
       </div>
+
+      {/* Subtle Notice about additional costs */}
+      <p className="mt-4 text-md text-muted-foreground italic">
+        * Outside our service area? Additional costs may apply for recoveries
+        beyond our typical coverage zone. We cover all of Maine — contact us for
+        a quote.
+      </p>
     </div>
   );
 }

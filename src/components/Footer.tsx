@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { footerItems } from "@/config/footer";
+import { Heart } from "lucide-react";
 
 export function Footer() {
   const pathname = usePathname();
 
   return (
-    <footer className="bg-background text-muted-foreground text-sm py-6 mt-auto">
+    <footer className="bg-muted text-muted-background text-sm py-6 mt-auto">
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
         {/* Company Name */}
         <div className="mb-4 md:mb-0 text-center md:text-left">
@@ -29,6 +30,21 @@ export function Footer() {
             </Link>
           ))}
         </nav>
+      </div>
+
+      {/* Branding */}
+      <div className="mt-6 text-center text-muted-foreground">
+        <span className="text-xs flex items-center justify-center gap-1">
+          Made with <Heart className="text-red-500 w-4 h-4" /> by{" "}
+        </span>
+        <a
+          href="https://mbarry.net"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-foreground/80 hover:text-primary font-medium"
+        >
+          Michael Barry Web Development, LLC
+        </a>
       </div>
     </footer>
   );

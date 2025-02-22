@@ -18,7 +18,7 @@ export default function ServiceAreaMap({ hoveredTown }: ServiceAreaMapProps) {
   // Add theme detection logic
   useEffect(() => {
     const checkDarkMode = () => {
-      return document.documentElement.classList.contains("dark");
+      return document.documentElement.classList.contains("DARK");
     };
 
     // Initial check
