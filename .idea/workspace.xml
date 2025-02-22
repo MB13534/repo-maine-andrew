@@ -4,36 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="motion changes">
-      <change afterPath="$PROJECT_DIR$/public/boat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/hero-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/hero-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/hero-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/hero-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/hero-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/hero-trees.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/hero-water.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/licensing-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/licensing-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/licensing-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/licensing-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/licensing-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/licensing-6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/lighthouse.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/trees.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/truck.png" afterDir="false" />
+    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="branding&#10;andrew feedback">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EmailForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EmailForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FloatingCTA.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FloatingCTA.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThemeProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThemeProvider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ThemeToggle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThemeToggle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/maps/ServiceAreaMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/maps/ServiceAreaMap.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/sections/ServiceAreaSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/sections/ServiceAreaSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/nav.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/nav.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/animations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/animations.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +111,7 @@
       <workItem from="1739409140796" duration="31751000" />
       <workItem from="1739586485236" duration="9930000" />
       <workItem from="1739842930011" duration="2203000" />
-      <workItem from="1740190357067" duration="12055000" />
+      <workItem from="1740190357067" duration="13119000" />
     </task>
     <task id="LOCAL-00001" summary="refactor(ServiceAreaMap): adds logic to change colors based on theme">
       <option name="closed" value="true" />
@@ -284,7 +257,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739807957192</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="branding&#10;andrew feedback">
+      <option name="closed" value="true" />
+      <created>1740202638288</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1740202638288</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,7 +300,8 @@
     <MESSAGE value="file naming conventions" />
     <MESSAGE value="typo" />
     <MESSAGE value="motion changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="motion changes" />
+    <MESSAGE value="branding&#10;andrew feedback" />
+    <option name="LAST_COMMIT_MESSAGE" value="branding&#10;andrew feedback" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

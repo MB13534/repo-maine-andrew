@@ -586,7 +586,7 @@ export default function Home() {
             description="Our repossession process is straightforward and efficient."
           />
           <div className="grid md:grid-cols-2 gap-8 mt-10">
-            <div className="relative rounded-lg overflow-hidden shadow-md">
+            <div className="relative rounded-lg overflow-hidden shadow-md h-[300px] md:h-auto">
               <Image
                 src="/boat.png"
                 alt="Docked Boat in Marina"
@@ -665,7 +665,7 @@ export default function Home() {
                 );
               })}
             </motion.div>
-            <div className="relative rounded-lg overflow-hidden shadow-md">
+            <div className="relative rounded-lg overflow-hidden shadow-md h-[500px] md:h-auto">
               <Image
                 src="/trees.png"
                 alt="Trees in Maine"
@@ -753,7 +753,7 @@ export default function Home() {
             </Link>
           </motion.div>
           <motion.div
-            className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-3 sm:px-4 md:px-6 lg:px-8"
+            className="grid xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-3 sm:px-4 md:px-6 lg:px-8"
             initial="hidden"
             animate={isLicensingInView ? "visible" : "hidden"}
             variants={staggerContainer}
@@ -775,7 +775,7 @@ export default function Home() {
                   <motion.div
                     variants={slideInRight}
                     whileHover={{ scale: 1.05 }}
-                    className="relative text-center p-1 border rounded-lg border-border hover:shadow-lg transition-shadow"
+                    className="relative text-center p-1 border rounded-lg border-border hover:shadow-lg transition-shadow h-[250px] sm:h-auto"
                   >
                     <Image
                       src={`/licensing-${index + 1}.png`}
