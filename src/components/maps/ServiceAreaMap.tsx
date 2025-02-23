@@ -3,7 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { MAPBOX_TOKEN, MAPBOX_STYLE } from "@/config/mapbox";
+import {
+  MAPBOX_TOKEN,
+  MAPBOX_STYLE,
+  SERVICE_AREA_TOWNS_SOURCE_URL,
+  SERVICE_TOWNS_FILL_LAYER,
+  SERVICE_TOWNS_OUTLINE_LAYER,
+} from "@/config/mapbox";
 
 interface ServiceAreaMapProps {
   hoveredTown: string | null;
@@ -15,16 +21,11 @@ export default function ServiceAreaMap({ hoveredTown }: ServiceAreaMapProps) {
   const popupRef = useRef<mapboxgl.Popup | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Add theme detection logic
+  // Detect theme mode changes
   useEffect(() => {
-    const checkDarkMode = () => {
-      return document.documentElement.classList.contains("DARK");
-    };
-
-    // Initial check
+    const checkDarkMode = () =>
+      document.documentElement.classList.contains("DARK");
     setIsDarkMode(checkDarkMode());
-
-    // Watch for theme changes
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.attributeName === "class") {
@@ -32,19 +33,16 @@ export default function ServiceAreaMap({ hoveredTown }: ServiceAreaMapProps) {
         }
       });
     });
-
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ["class"],
     });
-
     return () => observer.disconnect();
   }, []);
 
-  // Update popup when theme changes
+  // Rebuild popup if theme changes
   useEffect(() => {
     if (popupRef.current) {
-      // Remove existing popup
       popupRef.current.remove();
       popupRef.current = new mapboxgl.Popup({
         closeButton: false,
@@ -54,86 +52,60 @@ export default function ServiceAreaMap({ hoveredTown }: ServiceAreaMapProps) {
     }
   }, [isDarkMode]);
 
+  // Initialize map and add sources/layers
   useEffect(() => {
     if (mapInstance.current || !mapContainer.current) return;
-
     mapboxgl.accessToken = MAPBOX_TOKEN;
     const map = new mapboxgl.Map({
       container: mapContainer.current,
       style: MAPBOX_STYLE,
-      center: [-70.2553, 43.6591], // Portland, ME coordinates
-      zoom: 9,
+      center: [-70.2553, 43.6591], // Portland, ME
+      zoom: 7.5,
     });
 
     map.on("load", () => {
-      map.addSource("service-area", {
+      // Service Area Towns ---
+      map.addSource("service_area_towns", {
         type: "vector",
-        url: "mapbox://mb13534.cq4v9lwz",
+        url: SERVICE_AREA_TOWNS_SOURCE_URL,
+      });
+      map.addLayer(SERVICE_TOWNS_FILL_LAYER);
+      map.addLayer(SERVICE_TOWNS_OUTLINE_LAYER);
+
+      // Hover and Popups for Towns ---
+      map.on("mousemove", "service_towns_fill", (e) => {
+        if (!e.features || e.features.length === 0) return;
+        const { TOWN } = e.features[0].properties || {};
+        if (!popupRef.current) {
+          popupRef.current = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false,
+            className: isDarkMode ? "popup-dark" : "popup-light",
+          });
+        }
+        popupRef.current
+          .setLngLat(e.lngLat)
+          .setHTML(`<strong>${TOWN || "Unknown Town"}</strong>`)
+          .addTo(map);
+        // When hovered, make the town more opaque
+        map.setPaintProperty("service_towns_fill", "fill-opacity", [
+          "case",
+          ["==", ["get", "TOWN"], TOWN],
+          0.7,
+          0.2,
+        ]);
       });
 
-      map.addLayer({
-        id: "service-area-fill",
-        type: "fill",
-        source: "service-area",
-        "source-layer": "service_area-9830oo",
-        paint: {
-          "fill-color": "#1E40AF",
-          "fill-opacity": 0.4,
-        },
-      });
-
-      map.addLayer({
-        id: "service-area-outline",
-        type: "line",
-        source: "service-area",
-        "source-layer": "service_area-9830oo",
-        paint: {
-          "line-color": "#1E3A8A",
-          "line-width": 2,
-        },
-      });
-
-      // Hover effect on map
-      map.on("mousemove", "service-area-fill", (e) => {
-        if (e.features && e.features.length > 0) {
-          const townName = e.features[0].properties?.TOWN || "Unknown Town";
-
-          // Update hovered town name
-          if (!hoveredTown) {
-            map.setPaintProperty("service-area-fill", "fill-opacity", [
-              "case",
-              ["==", ["get", "TOWN"], townName],
-              0.7,
-              0.4,
-            ]);
-
-            // Use state value instead of direct DOM check
-            if (!popupRef.current) {
-              popupRef.current = new mapboxgl.Popup({
-                closeButton: false,
-                closeOnClick: false,
-                className: isDarkMode ? "popup-dark" : "popup-light",
-              });
-            }
-
-            // Update existing popup class if it exists
-            popupRef.current
-              .setLngLat(e.lngLat)
-              .setHTML(`<strong>${townName}</strong>`)
-              .addTo(map);
-          }
+      map.on("mouseleave", "service_towns_fill", () => {
+        map.setPaintProperty("service_towns_fill", "fill-opacity", 0.2);
+        if (popupRef.current) {
+          popupRef.current.remove();
+          popupRef.current = null;
         }
       });
 
-      map.on("mouseleave", "service-area-fill", () => {
-        if (!hoveredTown) {
-          map.setPaintProperty("service-area-fill", "fill-opacity", 0.4);
-        }
-        if (popupRef.current) popupRef.current.remove();
-      });
+      mapInstance.current = map;
     });
-
-    map.on("idle", () => (mapInstance.current = map));
 
     return () => {
       if (mapInstance.current) {
@@ -141,22 +113,22 @@ export default function ServiceAreaMap({ hoveredTown }: ServiceAreaMapProps) {
         mapInstance.current = null;
       }
     };
-  }, []);
+  }, [isDarkMode]);
 
-  // Effect for Badge hover
+  // React to hoveredTown from the chips
   useEffect(() => {
     if (!mapInstance.current) return;
     const map = mapInstance.current;
-
     if (hoveredTown) {
-      map.setPaintProperty("service-area-fill", "fill-opacity", [
+      // For chips, set the hovered town to be more opaque
+      map.setPaintProperty("service_towns_fill", "fill-opacity", [
         "case",
         ["==", ["get", "TOWN"], hoveredTown],
-        0.7, // Highlight hovered town from badge
-        0.4,
+        0.7,
+        0.2,
       ]);
     } else {
-      map.setPaintProperty("service-area-fill", "fill-opacity", 0.4);
+      map.setPaintProperty("service_towns_fill", "fill-opacity", 0.2);
     }
   }, [hoveredTown]);
 

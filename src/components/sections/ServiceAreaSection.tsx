@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { otherAreas, serviceAreas } from "@/config/mapbox";
+import { OTHER_AREAS, SERVICE_AREAS } from "@/config/mapbox";
 import ServiceAreaMap from "@/components/maps/ServiceAreaMap";
 import { Separator } from "@/components/ui/separator";
 import { CheckCircle } from "lucide-react";
@@ -23,7 +23,7 @@ export default function ServiceAreaSection() {
         }
       />
       <div className="flex flex-wrap justify-center gap-2 mb-8">
-        {serviceAreas.map((area) => (
+        {SERVICE_AREAS.map((area) => (
           <Badge
             key={area}
             variant="outline"
@@ -47,7 +47,7 @@ export default function ServiceAreaSection() {
           Additional Service Areas
         </h3>
         <div className="grid grid-cols-2 gap-2 text-sm text-muted-foreground">
-          {otherAreas.map((city) => (
+          {OTHER_AREAS.map((city) => (
             <div key={city} className="flex items-center">
               <CheckCircle className="h-4 w-4 mr-2 text-green-600" />
               {city}

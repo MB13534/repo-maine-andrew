@@ -139,7 +139,7 @@ export function EmailForm() {
           <FormField
             control={form.control}
             name="name"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel>Full Name</FormLabel>
                 <FormControl>
@@ -147,9 +147,11 @@ export function EmailForm() {
                     placeholder="John Doe"
                     {...field}
                     autoComplete="name"
+                    aria-describedby={
+                      fieldState.error ? `${field.name}-error` : undefined
+                    }
                   />
                 </FormControl>
-                <FormMessage />
               </FormItem>
             )}
           />
@@ -158,7 +160,7 @@ export function EmailForm() {
           <FormField
             control={form.control}
             name="email"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
@@ -167,6 +169,9 @@ export function EmailForm() {
                     placeholder="john@example.com"
                     {...field}
                     autoComplete="email"
+                    aria-describedby={
+                      fieldState.error ? `${field.name}-error` : undefined
+                    }
                   />
                 </FormControl>
                 <FormMessage />
@@ -178,7 +183,7 @@ export function EmailForm() {
           <FormField
             control={form.control}
             name="phone"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel>Phone Number</FormLabel>
                 <FormControl>
@@ -187,6 +192,9 @@ export function EmailForm() {
                     placeholder="(555) 555-5555"
                     {...field}
                     autoComplete="tel"
+                    aria-describedby={
+                      fieldState.error ? `${field.name}-error` : undefined
+                    }
                   />
                 </FormControl>
                 <FormMessage />
@@ -274,7 +282,7 @@ export function EmailForm() {
             <FormField
               control={form.control}
               name="assetLocation"
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <FormItem>
                   <FormLabel>Last Known Asset Location</FormLabel>
                   <FormControl>
@@ -282,6 +290,9 @@ export function EmailForm() {
                       placeholder="Enter address or city/state"
                       {...field}
                       autoComplete="street-address"
+                      aria-describedby={
+                        fieldState.error ? `${field.name}-error` : undefined
+                      }
                     />
                   </FormControl>
                   <FormMessage />
@@ -295,7 +306,7 @@ export function EmailForm() {
         <FormField
           control={form.control}
           name="additionalInfo"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem>
               <FormLabel>Additional Information</FormLabel>
               <FormControl>
@@ -304,6 +315,9 @@ export function EmailForm() {
                   className="resize-none"
                   {...field}
                   autoComplete="off"
+                  aria-describedby={
+                    fieldState.error ? `${field.name}-error` : undefined
+                  }
                 />
               </FormControl>
               <FormMessage />

@@ -418,7 +418,7 @@ export default function Home() {
         <div className="relative z-10 max-w-6xl w-full px-8 text-center">
           <Badge
             variant="outline"
-            className="mb-6 p-2 bg-primary/40 text-primary-foreground border-primary backdrop-blur-sm"
+            className="mb-6 p-2 bg-accent text-accent-foreground border-accent backdrop-blur-sm"
           >
             <ShieldCheck className="mr-2 h-4 w-4" />
             Your Trusted Repossession Partner
@@ -439,7 +439,7 @@ export default function Home() {
               <Link href={"#contact"}>
                 <Button
                   size="lg"
-                  className="bg-primary hover:bg-primary/90 text-lg px-8 py-6 shadow-lg"
+                  className="bg-primary text-lg text-primary-foreground hover:bg-primary/90 px-8 py-6 shadow-lg"
                 >
                   Request Repossession Now
                 </Button>
@@ -449,7 +449,7 @@ export default function Home() {
               <Button
                 variant="secondary"
                 size="lg"
-                className="text-lg px-8 py-6 shadow-lg"
+                className="bg-secondary text-lg text-secondary-foreground hover:bg-secondary/80 px-8 py-6 shadow-lg"
               >
                 Learn More
               </Button>

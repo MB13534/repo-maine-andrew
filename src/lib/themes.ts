@@ -435,7 +435,6 @@ export const themes: Record<
   },
   slate: {
     light: {
-      // These values come directly from your global.css :root
       background: "0 0% 100%",
       foreground: "222.2 84% 4.9%",
       card: "0 0% 100%",
@@ -446,18 +445,17 @@ export const themes: Record<
       primaryForeground: "210 40% 98%",
       secondary: "210 40% 96.1%",
       secondaryForeground: "222.2 47.4% 11.2%",
-      muted: "210 40% 96.1%",
-      mutedForeground: "215.4 16.3% 46.9%",
-      accent: "210 40% 96.1%",
+      muted: "210 40% 85%",
+      mutedForeground: "215.4 16.3% 30%",
+      accent: "210 40% 90%",
       accentForeground: "222.2 47.4% 11.2%",
       destructive: "0 84.2% 60.2%",
-      destructiveForeground: "210 40% 98%",
+      destructiveForeground: "0 0% 100%",
       border: "214.3 31.8% 91.4%",
       input: "214.3 31.8% 91.4%",
       ring: "222.2 84% 4.9%",
     },
     dark: {
-      // These values come from your global.css .dark
       background: "222.2 84% 4.9%",
       foreground: "210 40% 98%",
       card: "222.2 84% 4.9%",
@@ -468,9 +466,9 @@ export const themes: Record<
       primaryForeground: "222.2 47.4% 11.2%",
       secondary: "217.2 32.6% 17.5%",
       secondaryForeground: "210 40% 98%",
-      muted: "217.2 32.6% 17.5%",
-      mutedForeground: "215 20.2% 65.1%",
-      accent: "217.2 32.6% 17.5%",
+      muted: "217.2 32.6% 22%", // Slightly lighter muted background
+      mutedForeground: "215 20.2% 72%", // Brighter muted text for contrast
+      accent: "217.2 32.6% 25%",
       accentForeground: "210 40% 98%",
       destructive: "0 62.8% 30.6%",
       destructiveForeground: "210 40% 98%",
