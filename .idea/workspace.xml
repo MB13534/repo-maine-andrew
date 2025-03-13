@@ -4,9 +4,52 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="branding&#10;andrew feedback">
+    <list default="true" id="a67ed017-2731-4898-85c0-1dfdedb3c6c9" name="Changes" comment="WAVE&#10;new map&#10;semantics">
+      <change afterPath="$PROJECT_DIR$/public/about.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/hero-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/hero-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/licensing-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/licensing-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/licensing-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/licensing-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/licensing-5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/licensing-6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/process.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/services.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_scripts/filter_geojson_by_towns.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_scripts/find_service_area_results.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_scripts/maine_counties_towns.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_scripts/maine_towns.geojson" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_scripts/mapbox_upload.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_scripts/service area.kml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_scripts/service_area_results.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_scripts/service_area_towns.geojson" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/boat.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/boat.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/file.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/globe.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/hero-1.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/hero-1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/hero-2.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/hero-2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/hero-3.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/hero-3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/hero-4.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/hero-4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/hero-5.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/hero-5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/hero-trees.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/hero-trees.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/hero-water.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/hero-water.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/licensing-1.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/licensing-1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/licensing-2.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/licensing-2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/licensing-3.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/licensing-3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/licensing-4.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/licensing-4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/licensing-5.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/licensing-5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/licensing-6.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/licensing-6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/lighthouse.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/lighthouse.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/next.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/trees.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/trees.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/truck.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/archive/truck.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vercel.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/window.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ThemeToggle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ThemeToggle.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +104,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Michael/Desktop/Michael Barry Web Development/Projects/repo-maine-andrew/public",
+    "last_opened_file_path": "C:/Users/Michael/Desktop/Michael Barry Web Development/Projects/repo-maine-andrew/python_scripts",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -71,27 +114,36 @@
     "settings.editor.selected.configurable": "vcs.Git",
     "ts.external.directory.path": "C:\\Users\\Michael\\Desktop\\Michael Barry Web Development\\Projects\\repo-maine-andrew\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\python_scripts" />
       <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\public" />
       <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew" />
       <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\next-starter-kit\src\app\legal" />
       <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\next-starter-kit\src\app\privacy" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\public\archive" />
+      <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\public" />
+      <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\python_scripts" />
       <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\src" />
       <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\src\config" />
-      <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\repo-maine-andrew\src\components\maps" />
-      <recent name="C:\Users\Michael\Desktop\Michael Barry Web Development\Projects\next-starter-kit\src\components" />
     </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
-        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
       </set>
     </attachedChunks>
   </component>
@@ -111,7 +163,11 @@
       <workItem from="1739409140796" duration="31751000" />
       <workItem from="1739586485236" duration="9930000" />
       <workItem from="1739842930011" duration="2203000" />
-      <workItem from="1740190357067" duration="13119000" />
+      <workItem from="1740190357067" duration="47723000" />
+      <workItem from="1740335279565" duration="6388000" />
+      <workItem from="1740411275974" duration="517000" />
+      <workItem from="1740510058676" duration="23000" />
+      <workItem from="1741895201440" duration="1921000" />
     </task>
     <task id="LOCAL-00001" summary="refactor(ServiceAreaMap): adds logic to change colors based on theme">
       <option name="closed" value="true" />
@@ -265,7 +321,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740202638288</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="adjusts sm screen images">
+      <option name="closed" value="true" />
+      <created>1740203703968</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1740203703968</updated>
+    </task>
+    <task id="LOCAL-00021" summary="WAVE&#10;new map&#10;semantics">
+      <option name="closed" value="true" />
+      <created>1740290494515</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1740290494515</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,7 +373,9 @@
     <MESSAGE value="typo" />
     <MESSAGE value="motion changes" />
     <MESSAGE value="branding&#10;andrew feedback" />
-    <option name="LAST_COMMIT_MESSAGE" value="branding&#10;andrew feedback" />
+    <MESSAGE value="adjusts sm screen images" />
+    <MESSAGE value="WAVE&#10;new map&#10;semantics" />
+    <option name="LAST_COMMIT_MESSAGE" value="WAVE&#10;new map&#10;semantics" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

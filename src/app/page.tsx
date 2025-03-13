@@ -39,13 +39,7 @@ import SectionContainer from "@/components/SectionContainer";
 import { HoverableAccordionTrigger } from "@/components/HoverableAccordionTrigger";
 
 // Image URLs
-const heroImages = [
-  "/hero-1.png",
-  "/hero-2.png",
-  "/hero-3.png",
-  "/hero-4.png",
-  "/hero-5.png",
-];
+const heroImages = ["/hero-1.jpg", "/hero-2.jpg"];
 
 // Icon Mappings
 const whyChooseIcons = {
@@ -369,13 +363,13 @@ export default function Home() {
     margin: "-50px",
   });
 
-  // Rotate hero images every 5 seconds
+  // Rotate hero images every 10 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) =>
         prevIndex === heroImages.length - 1 ? 0 : prevIndex + 1,
       );
-    }, 5000); // 5 seconds
+    }, 10000); // 10 seconds
 
     return () => clearInterval(interval);
   }, []);
@@ -516,8 +510,8 @@ export default function Home() {
           </div>
           <div className="relative aspect-video rounded-xl overflow-hidden">
             <Image
-              src="/truck.png"
-              alt="Repossession Truck Driving"
+              src="/about.jpg"
+              alt="Boats in Harbor"
               className="object-cover object-bottom"
               fill
               priority
@@ -588,8 +582,8 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 mt-10">
             <div className="relative rounded-lg overflow-hidden shadow-md h-[300px] md:h-auto">
               <Image
-                src="/boat.png"
-                alt="Docked Boat in Marina"
+                src="/process.jpg"
+                alt="Pen and Paper"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
@@ -667,8 +661,8 @@ export default function Home() {
             </motion.div>
             <div className="relative rounded-lg overflow-hidden shadow-md h-[500px] md:h-auto">
               <Image
-                src="/trees.png"
-                alt="Trees in Maine"
+                src="/services.jpg"
+                alt="Computer Collaboration"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
@@ -778,7 +772,7 @@ export default function Home() {
                     className="relative text-center p-1 border rounded-lg border-border hover:shadow-lg transition-shadow h-[250px] sm:h-auto"
                   >
                     <Image
-                      src={`/licensing-${index + 1}.png`}
+                      src={`/licensing-${index + 1}.jpg`}
                       alt={`Licensing Image ${index + 1}`}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"
