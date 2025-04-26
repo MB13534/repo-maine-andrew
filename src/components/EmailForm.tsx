@@ -266,9 +266,9 @@ export function EmailForm() {
                         />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="car">Automobile</SelectItem>
-                        <SelectItem value="boat">Boat/Marine</SelectItem>
-                        <SelectItem value="rv">RV/Camper</SelectItem>
+                        <SelectItem value="automobile">Automobile</SelectItem>
+                        <SelectItem value="boat/marine">Boat/Marine</SelectItem>
+                        <SelectItem value="rv/camper">RV/Camper</SelectItem>
                         <SelectItem value="equipment">Equipment</SelectItem>
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
