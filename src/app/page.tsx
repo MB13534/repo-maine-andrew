@@ -18,6 +18,7 @@ import {
   Gavel,
   Clock,
   BadgeCheck,
+  Send,
 } from "lucide-react";
 import {
   Accordion,
@@ -853,7 +854,19 @@ export default function Home() {
         <SectionContainer className="text-center">
           <SectionHeader
             title="Ready to Recover Your Assets?"
-            description="Fill out the form or call us to speak with one of our experts. Our team typically responds within 24 hours."
+            description={
+              <>
+                Fill out the form below, email us directly at{" "}
+                <a
+                  href="mailto:contact@repomaine.com"
+                  className="text-primary hover:underline"
+                >
+                  contact@repomaine.com
+                </a>
+                , or call to speak with an expert. Our team typically responds
+                within 24 hours.
+              </>
+            }
           />
           <Card className="shadow-md mt-8 bg-card border-2 border-border">
             <CardContent className="p-8">
@@ -907,19 +920,35 @@ export default function Home() {
             Reach out now to learn more about our process and how we can assist
             you.
           </p>
-          <Link href="tel:2072227202">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="tel:2072227202">
+              <Button
+                variant="secondary"
+                size="lg"
+                className="text-lg font-semibold border border-primary text-primary hover:bg-primary hover:text-primary-foreground shadow-md"
+              >
+                <Phone className="h-5 w-5 mr-2" />
+                Speak With an Expert
+              </Button>
+            </Link>
             <Button
               variant="secondary"
               size="lg"
               className="text-lg font-semibold border border-primary text-primary hover:bg-primary hover:text-primary-foreground shadow-md"
+              asChild
             >
-              <Phone className="h-5 w-5 mr-2" />
-              Speak With an Expert
+              <a href="mailto:contact@repomaine.com">
+                <Send className="h-5 w-5 mr-2" />
+                Email Us Directly
+              </a>
             </Button>
-          </Link>
-          <p className="mt-2 text-lg font-semibold text-primary">
-            (207)-222-7202
-          </p>
+          </div>
+          <div className="mt-4 space-y-1">
+            <p className="text-lg font-semibold text-primary">(207)-222-7202</p>
+            <p className="text-lg font-semibold text-primary">
+              contact@repomaine.com
+            </p>
+          </div>
         </div>
       </motion.section>
     </div>

@@ -146,6 +146,7 @@ export function EmailForm() {
                   <Input
                     placeholder="John Doe"
                     {...field}
+                    name="name"
                     autoComplete="name"
                     aria-describedby={
                       fieldState.error ? `${field.name}-error` : undefined
@@ -168,6 +169,7 @@ export function EmailForm() {
                     type="email"
                     placeholder="john@example.com"
                     {...field}
+                    name="email"
                     autoComplete="email"
                     aria-describedby={
                       fieldState.error ? `${field.name}-error` : undefined
@@ -191,6 +193,7 @@ export function EmailForm() {
                     type="tel"
                     placeholder="(555) 555-5555"
                     {...field}
+                    name="phone"
                     autoComplete="tel"
                     aria-describedby={
                       fieldState.error ? `${field.name}-error` : undefined
@@ -337,6 +340,23 @@ export function EmailForm() {
             </>
           )}
         </Button>
+
+        <div className="mt-6 pt-6 border-t border-border text-center">
+          <p className="text-sm text-muted-foreground mb-3">
+            Something wrong with the form or prefer to email us directly?
+          </p>
+          <Button
+            type="button"
+            variant="outline"
+            className="gap-2"
+            asChild
+          >
+            <a href="mailto:contact@repomaine.com">
+              <Send className="h-4 w-4" />
+              contact@repomaine.com
+            </a>
+          </Button>
+        </div>
       </form>
     </Form>
   );
